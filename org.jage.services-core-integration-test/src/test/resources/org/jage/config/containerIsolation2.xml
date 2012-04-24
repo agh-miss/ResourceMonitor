@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+	
+	<agent name="obj1" class="org.jage.platform.component.definition.ClassWithProperties">
+		<list name="list">
+			<reference target="subobj2" />
+		</list>
+		<property name="list">
+			<reference target="list" />
+		</property>
+	</agent>
+	<component name="obj2" class="org.jage.platform.component.definition.ClassWithProperties"
+		isSingleton="true">
+		<component name="subobj2" class="org.jage.platform.component.definition.ClassWithProperties"
+			isSingleton="true">
+		</component>
+	</component>
+
+</configuration>

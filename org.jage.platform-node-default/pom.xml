@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>node-default</artifactId>
+
+	<name>jAgE platform node default</name>
+	<description>The default implementation of AgE node</description>
+	<url>http://age.iisg.agh.edu.pl/jage/platform/node-default/</url>
+
+	<parent>
+		<groupId>org.jage.platform</groupId>
+		<artifactId>platform</artifactId>
+		<version>2.6.0-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<!-- AgE Platform dependencies -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>node</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>component</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>component-pico</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>starter</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- External libraries dependencies -->
+		<dependency>
+			<groupId>commons-cli</groupId>
+			<artifactId>commons-cli</artifactId>
+		</dependency>
+	</dependencies>
+</project>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://age.iisg.agh.edu.pl/AgE"
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE http://age.iisg.agh.edu.pl/xsd/age.xsd">
+	
+	<object name="advanced1" class="org.jage.property.xml.testHelpers.AdvancedExampleComponent">
+		<property name="intProperty"><value class="Integer" value="777"/></property>
+		<property name="stringProperty"><value class="String" value="blah! blah!"/></property>
+		<property name="floatProperty"><value class="Float" value="1.69"/></property>
+
+		<list name="normals">
+			<object name="simple1" class="org.jage.property.xml.testHelpers.NormalComponent">
+				<property name="stringProperty"><value class="String" value="1"/></property>
+				<property name="intProperty"><value class="Integer" value="1"/></property>
+			</object>
+			<reference target="simple1" count="1"/>
+			<object name="simple2" class="org.jage.property.xml.testHelpers.NormalComponent">
+				<property name="stringProperty"><value class="String" value="2"/></property>
+				<property name="intProperty"><value class="Integer" value="2"/></property>
+			</object>
+			<reference target="simple2" count="1"/>
+			<object name="simple3" class="org.jage.property.xml.testHelpers.NormalComponent">
+				<property name="stringProperty"><value class="String" value="3"/></property>
+				<property name="intProperty"><value class="Integer" value="3"/></property>
+			</object>
+			<reference target="simple3" count="1"/>
+		</list>
+
+		<property name="normalList"><reference target="normals"/></property>
+	</object>
+	
+
+</configuration>

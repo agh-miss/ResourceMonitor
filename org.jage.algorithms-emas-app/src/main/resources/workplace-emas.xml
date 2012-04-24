@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+
+	<agent name="workplace" class="org.jage.workplace.IsolatedSimpleWorkplace">
+		<property name="nameInitializer">
+			<value value="island*" class="String" />
+		</property>
+
+		<agent name="island" class="org.jage.emas.agent.DefaultIslandAgent">
+			<property name="nameInitializer">
+				<value value="island*" class="String" />
+			</property>
+
+			<agent name="agent" class="org.jage.emas.agent.DefaultIndividualAgent">
+					<property name="nameInitializer">
+						<value value="individual*" class="String" />
+					</property>
+					<strategy name="actionPreparator" class="org.jage.emas.action.individual.ActionPreparator" >
+						<list name="contexts" isSingleton="true">
+							<strategy name="encounterActionCtx" class="org.jage.emas.action.individual.EncounterActionContext" />
+							<strategy name="migrationActionCtx" class="org.jage.emas.action.individual.MigrationActionContext" />
+							<strategy name="deathActionCtx" class="org.jage.emas.action.individual.DeathActionContext" />
+							<reference target="encounterActionCtx"/>
+							<reference target="migrationActionCtx"/>
+							<reference target="deathActionCtx"/>
+						</list>
+					</strategy>
+			</agent>
+
+			<strategy name="encounterAction" class="org.jage.emas.action.individual.EncounterAction" >
+				<strategy name="reproductionPredicate" class="org.jage.emas.predicate.HighEnergyPredicate">
+					<property name="threshold">
+						<value value="90" class="Double" />
+					</property>
+				</strategy>
+				<strategy name="sexualReproductionStrategy" class="org.jage.emas.reproduction.DefaultSexualReproduction" />
+				<strategy name="asexualReproductionStrategy" class="org.jage.emas.reproduction.DefaultAsexualReproduction" />
+				<strategy name="battleStrategy" class="org.jage.emas.battle.DeterministicFitnessBattle" />
+				<strategy name="battleEnergyTransfer" class="org.jage.emas.energy.ConstantEnergyTransfer" >
+					<property name="transferredEnergy">
+						<value value="20.0" class="Double" />
+					</property>
+				</strategy>
+			</strategy>
+			<strategy name="migrationAction" class="org.jage.emas.action.individual.MigrationAction" >
+				<strategy name="migrationPredicate" class="org.jage.emas.predicate.RandomPredicate">
+					<property name="probability">
+						<value value="0.01" class="Double" />
+					</property>
+				</strategy>
+				<strategy name="migrationStrategy" class="org.jage.emas.migration.RandomDestinationMigration"/>
+			</strategy>
+			<strategy name="deathAction" class="org.jage.emas.action.individual.DeathAction" >
+				<strategy name="deathPredicate" class="org.jage.emas.predicate.LowEnergyPredicate">
+					<property name="threshold">
+						<value value="0" class="Double" />
+					</property>
+				</strategy>
+			</strategy>
+
+			<list name="agents">
+				<reference target="agent"/>
+				<reference target="agent"/>
+				<reference target="agent"/>
+				<reference target="agent"/>
+				<reference target="agent"/>
+			</list>
+			<property name="agents">
+				<reference target="agents" />
+			</property>
+
+			<!-- IslandAgents strategies -->
+			<strategy name="actionPreparator" class="org.jage.emas.action.island.ActionPreparator" >
+				<strategy name="initializationActionCtx" class="org.jage.emas.action.island.InitializationActionContext" />
+				<list name="contexts" isSingleton="true">
+					<strategy name="skippingActionCtx" class="org.jage.emas.util.SkippingActionContext" />
+					<strategy name="statisticsUpdateActionCtx" class="org.jage.emas.action.island.StatisticsUpdateActionContext" />
+					<reference target="skippingActionCtx"/>
+					<reference target="statisticsUpdateActionCtx"/>
+				</list>
+			</strategy>
+		</agent>
+		<list name="islands">
+			<reference target="island"/>
+			<reference target="island"/>
+			<reference target="island"/>
+			<reference target="island"/>
+			<reference target="island"/>
+		</list>
+		<property name="agents">
+			<reference target="islands" />
+		</property>
+
+		<strategy name="initializationAction" class="org.jage.emas.action.island.InitializationAction" >
+			<property name="initialEnergy">
+				<value value="100" class="Double" />
+			</property>
+		</strategy>
+		<strategy name="skippingAction" class="org.jage.emas.util.SkippingAction" />
+		<strategy name="statisticsUpdateAction" class="org.jage.emas.action.island.StatisticsUpdateAction" >
+			<property name="resolution">
+				<value class="Integer" value="100" />
+			</property>
+		</strategy>
+
+		<!-- Global Strategies -->
+
+		<strategy name="rand" class="org.jage.random.SimpleGenerator" >
+			<constructor-arg>
+				<value value="1234567890" class="Long"/>
+			</constructor-arg>
+		</strategy>
+
+		<strategy name="solutionEvaluator" class="org.jage.evaluation.realvalued.RastriginEvaluator" />
+		<strategy name="problem" class="org.jage.problem.realvalued.RastriginProblem">
+			<constructor-arg>
+				<value value="10" class="Integer" />
+			</constructor-arg>
+		</strategy>
+
+		<strategy name="solutionFactory" class="org.jage.solution.realvalued.RealValuedSolutionFactory" />
+
+		<strategy name="recombinationStrategy" class="org.jage.variation.recombination.realvalued.OnePointRecombination" />
+		<strategy name="mutationStategy" class="org.jage.variation.mutation.realvalued.NormalMicroMacroMutate">
+			<property name="chanceToMutate">
+				<value value="0.5" class="Double" />
+			</property>
+			<property name="mutationRange">
+				<value value="0.025" class="Double" />
+			</property>
+		</strategy>
+	</agent>
+</configuration>

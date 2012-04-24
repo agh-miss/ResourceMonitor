@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component
+  class="org.jage.property.xml.testHelpers.SimpleExampleComponent"
+  version="1.0.0" xmlns="org.jage"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="org.jage ageDependency.xsd">
+  <declaration>
+    <attribute access="direct" modifier="2" name="complexProperty" fieldName="_complexProperty" required="true">
+      <type>
+        <simpleClass
+          class="org.jage.property.testHelpers.InnerClassWithProperties" interface="false"/>
+      </type>
+    </attribute>
+    <attribute access="direct" modifier="2" name="complexArrayProperty" fieldName="_complexArrayProperty" required="true">
+      <type>
+        <array dims="1">
+          <type>
+            <simpleClass
+              class="org.jage.property.testHelpers.InnerClassWithProperties" interface="false"/>
+          </type>
+        </array>
+      </type>
+    </attribute>
+  </declaration>
+</component>

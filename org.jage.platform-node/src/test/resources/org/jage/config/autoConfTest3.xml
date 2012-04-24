@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<configuration>
+	<object name="testObject" class="org.jage.config.MyConfigurable">
+		<property name="myBoolean3">
+			<value class="java.lang.Boolean" value="true" />
+		</property>
+		<property name="myBoolean8">
+			<value class="java.lang.Boolean" value="false" />
+		</property>
+		<property name="myBoolean3">
+			<value class="java.lang.Boolean" value="true" />
+		</property>
+		<property name="myBoolean8">
+			<value class="java.lang.Boolean" value="true" />
+		</property>
+		<property name="myBoolean3">
+			<value class="java.lang.Boolean" value="true" />
+		</property>
+		<property name="myBoolean8">
+			<value class="java.lang.Boolean" value="false" />
+		</property>
+		<property name="myBoolean3">
+			<value class="java.lang.Boolean" value="true" />
+		</property>
+		<property name="myBoolean3">
+			<value class="java.lang.Boolean" value="true" />
+		</property>
+	</object>
+		
+		<myInt3>3</myInt3> <!-- required -->
+		<myInt8>8</myInt8> <!-- required -->
+		
+		<baseInt3>3</baseInt3> <!-- required --> 
+		<baseInt8>8</baseInt8> <!-- required -->				
+		
+		<myFloat3>3.3</myFloat3> <!-- required -->
+		<myFloat8>8.8</myFloat8> <!-- required -->
+		
+		<baseFloat3>3.3</baseFloat3> <!-- required --> 
+		<baseFloat8>8.8</baseFloat8> <!-- required -->	
+				
+		<myString3>s3</myString3> <!-- required -->
+		<myString8>s8</myString8> <!-- required -->
+		
+		<baseString3>b3</baseString3> <!-- required --> 
+		<baseString8>b8</baseString8> <!-- required -->					
+
+		<myObject3 class="java.lang.Object" />	
+	</testObject>
+
+</configuration>

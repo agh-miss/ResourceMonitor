@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+
+	<agent name="workplace" class="org.jage.workplace.IsolatedSimpleWorkplace">
+		<property name="nameInitializer">
+			<value value="workplace" class="String" />
+		</property>
+
+		<agent name="agent" class="org.jage.genetic.agent.GeneticActionDrivenAgent">
+			<property name="nameInitializer">
+				<value value="agent" class="String" />
+			</property>
+		</agent>
+
+		<list name="agents">
+			<reference target="agent" />
+		</list>
+
+		<property name="agents">
+			<reference target="agents" />
+		</property>
+
+		<!-- Strategies -->
+		<strategy name="populationFactory" class="org.jage.population.PopulationFactory">
+			<property name="populationSize">
+				<value class="Integer" value="50" />
+			</property>
+		</strategy>
+		<strategy name="solutionFactory" class="org.jage.solution.binary.BinarySolutionFactory" />
+
+		<strategy name="populationEvaluator" class="org.jage.evaluation.SequentialPopulationEvaluator" />
+		<strategy name="solutionEvaluator" class="org.jage.evaluation.binary.CountEvaluator" />
+
+		<strategy name="problem" class="org.jage.problem.binary.BinaryProblem">
+			<constructor-arg>
+				<value value="10" class="Integer" />
+			</constructor-arg>
+		</strategy>
+
+		<strategy name="rand" class="org.jage.random.SimpleGenerator" >
+			<constructor-arg>
+				<value value="1234567890" class="Long"/>
+			</constructor-arg>
+		</strategy>
+
+		<strategy name="geneticActionPreparator" class="org.jage.genetic.action.GeneticActionPreparator" />
+
+		<strategy name="initializationAction" class="org.jage.genetic.action.InitializationActionStrategy" />
+		<strategy name="preselectionAction" class="org.jage.genetic.action.PreselectionActionStrategy" />
+		<strategy name="variationAction" class="org.jage.genetic.action.VariationActionStrategy" />
+		<strategy name="evaluationAction" class="org.jage.genetic.action.EvaluationActionStrategy" />
+		<strategy name="statisticsUpdateAction" class="org.jage.genetic.action.StatisticsUpdateActionStrategy"/>
+
+		<strategy name="preselection" class="org.jage.genetic.preselection.StochasticPreselection" >
+			<strategy name="scaling" class="org.jage.genetic.scaling.SimpleScaling" />
+		</strategy>
+
+		<strategy name="variation" class="org.jage.variation.VariationOperator" >
+			<strategy name="recombinePopulation" class="org.jage.variation.recombination.PairedRecombinePopulation">
+				<property name="chanceToRecombine">
+					<value value="1" class="Double" />
+				</property>
+				<strategy name="recombineSolution" class="org.jage.variation.recombination.binary.BinaryOnePointRecombine" />
+			</strategy>
+			<strategy name="mutatePopulation" class="org.jage.variation.mutation.IndividuallyMutatePopulation">
+				<property name="chanceToMutate">
+					<value value="0.5" class="Double" />
+				</property>
+				<strategy name="mutateSolution" class="org.jage.variation.mutation.binary.BinaryMutate">
+					<property name="chanceToMutate">
+						<value value="0.5" class="Double" />
+					</property>
+				</strategy>
+			</strategy>
+		</strategy>
+	</agent>
+</configuration>

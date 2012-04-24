@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<age>
+	<testObject
+		class="org.jage.config.MyConfigurable"
+		myBoolean9="true"
+		myBoolean10="false"
+		baseBoolean9="true"
+		baseBoolean10="false"
+		
+		myInt9="9"
+		myInt10="10"
+		baseInt9="9"
+		baseInt10="10"
+		
+		myFloat9="9.9"
+		myFloat10="10.1"
+		baseFloat9="9.9"
+		baseFloat10="10.1"
+		
+		myString9="s9"
+		myString10="s10"
+		baseString9="b9"
+		baseString10="b10"
+		>
+		
+		<myBoolean1>true</myBoolean1>
+		<myBoolean2>false</myBoolean2>
+		<myBoolean3>true</myBoolean3> <!-- required -->
+		<myBoolean4>false</myBoolean4>
+		<myBoolean5>true</myBoolean5>
+		<myBoolean6>false</myBoolean6>
+		<myBoolean7>true</myBoolean7>
+		<myBoolean8>false</myBoolean8> <!-- required -->
+		
+		<baseBoolean1>true</baseBoolean1>
+		<baseBoolean2>false</baseBoolean2>
+		<baseBoolean3>true</baseBoolean3> <!-- required --> 
+		<baseBoolean4>false</baseBoolean4>
+		<baseBoolean5>true</baseBoolean5>
+		<baseBoolean6>false</baseBoolean6>
+		<baseBoolean7>true</baseBoolean7>
+		<baseBoolean8>false</baseBoolean8> <!-- required -->
+		
+		<myInt1>1</myInt1>
+		<myInt2>2</myInt2>
+		<myInt3>3</myInt3> <!-- required -->
+		<myInt4>4</myInt4>
+		<myInt5>5</myInt5>
+		<myInt6>6</myInt6>
+		<myInt7>7</myInt7>
+		<myInt8>8</myInt8> <!-- required -->
+		
+		<baseInt1>1</baseInt1>
+		<baseInt2>2</baseInt2>
+		<baseInt3>3</baseInt3> <!-- required --> 
+		<baseInt4>4</baseInt4>
+		<baseInt5>5</baseInt5>
+		<baseInt6>6</baseInt6>
+		<baseInt7>7</baseInt7>
+		<baseInt8>8</baseInt8> <!-- required -->				
+		
+		
+		<myFloat1>1.1</myFloat1>
+		<myFloat2>2.2</myFloat2>
+		<myFloat3>3.3</myFloat3> <!-- required -->
+		<myFloat4>4.4</myFloat4>
+		<myFloat5>5.5</myFloat5>
+		<myFloat6>6.6</myFloat6>
+		<myFloat7>7.7</myFloat7>
+		<myFloat8>8.8</myFloat8> <!-- required -->
+		
+		<baseFloat1>1.1</baseFloat1>
+		<baseFloat2>2.2</baseFloat2>
+		<baseFloat3>3.3</baseFloat3> <!-- required --> 
+		<baseFloat4>4.4</baseFloat4>
+		<baseFloat5>5.5</baseFloat5>
+		<baseFloat6>6.6</baseFloat6>
+		<baseFloat7>7.7</baseFloat7>
+		<baseFloat8>8.8</baseFloat8> <!-- required -->	
+				
+		<myString1>s1</myString1>
+		<myString2>s2</myString2>
+		<myString3>s3</myString3> <!-- required -->
+		<myString4>s4</myString4>
+		<myString5>s5</myString5>
+		<myString6>s6</myString6>
+		<myString7>s7</myString7>
+		<myString8>s8</myString8> <!-- required -->
+		
+		<baseString1>b1</baseString1>
+		<baseString2>b2</baseString2>
+		<baseString3>b3</baseString3> <!-- required --> 
+		<baseString4>b4</baseString4>
+		<baseString5>b5</baseString5>
+		<baseString6>b6</baseString6>
+		<baseString7>b7</baseString7>
+		<baseString8>b8</baseString8> <!-- required -->					
+		
+		<myObject3 class="java.lang.Object" />
+	</testObject>
+
+</age>

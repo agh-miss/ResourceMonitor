@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	Sample workplace configuration which contains common configuration structures.
+ -->
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://age.iisg.agh.edu.pl/AgE/2.5" 
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+
+	<component name="queryResult" isSingleton="false" class="org.jage.query.QueryableQueryResult"/>
+
+	<component name="empty" isSingleton="true" class="org.jage.query.QueryStepCache">
+		<property name="query">
+			<reference target="emptyQuery"/>
+		</property>
+		<property name="refreshAge">
+			<value value="1" class="Long"/>
+		</property>
+	</component>
+
+	<component name="emptyQuery" isSingleton="true" class="org.jage.query.RecordingQuery">
+		<property name="resultClass">
+			<value value="queryResult" class="String"/>
+		</property>
+	</component>	
+	
+	<component name="range1" isSingleton="true" class="org.jage.query.QueryStepCache">
+		<property name="query">
+			<reference target="rangeQuery1"/>
+		</property>
+		<property name="refreshAge">
+			<value value="1" class="Long"/>
+		</property>
+	</component>
+	
+	<component name="rangeQuery1" isSingleton="true" class="org.jage.query.RecordingQuery">
+		<list name="constraintsList">
+			<component name="rangeEntry1" isSingleton="true" class="org.jage.query.ConstraintEntry">
+				<property name="propertyName">
+					<value value="height" class="String"/>
+				</property>
+				<property name="constraint">
+					<reference target="rangeConstraint1"/>
+				</property>
+				
+				<component name="rangeConstraint1" isSingleton="true" class="org.jage.query.RangeConstraint">
+					<property name="lowestValue">
+						<value value="3.0" class="Float"/>
+					</property>
+					<property name="highestValue">
+						<value value="4.0" class="Float"/>
+					</property>
+				</component>
+			</component>
+			
+			<reference target="rangeEntry1"/>
+		</list>
+		
+		<property name="constraints">
+			<reference target="constraintsList"/>
+		</property>
+		<property name="resultClass">
+			<value value="queryResult" class="String"/>
+		</property>
+	</component>
+	
+	<component name="range2" isSingleton="true" class="org.jage.query.QueryStepCache">
+		<property name="query">
+			<reference target="rangeQuery2"/>
+		</property>
+		<property name="refreshAge">
+			<value value="1" class="Long"/>
+		</property>
+	</component>
+	
+	<component name="rangeQuery2" isSingleton="true" class="org.jage.query.RecordingQuery">
+		<list name="constraintsList">
+			<component name="rangeEntry2" isSingleton="true" class="org.jage.query.ConstraintEntry">
+				<property name="propertyName">
+					<value value="staticFactor"  class="String"/>
+				</property>
+				<property name="constraint">
+					<reference target="rangeConstraint2"/>
+				</property>
+				
+				<component name="rangeConstraint2" isSingleton="true" class="org.jage.query.RangeConstraint">
+					<property name="lowestValue">
+						<value value="50"  class="Short"/>
+					</property>
+					<property name="highestValue">
+						<value value="5000" class="Long"/>
+					</property>
+				</component>
+			</component>
+			
+			<reference target="rangeEntry2"/>
+		</list>
+		
+		<property name="constraints">
+			<reference target="constraintsList"/>
+		</property>
+		<property name="resultClass">
+			<value value="queryResult" class="String"/>
+		</property>
+	</component>
+	
+	<component name="range2edge" isSingleton="true" class="org.jage.query.QueryStepCache">
+		<property name="query">
+			<reference target="rangeQuery2edge"/>
+		</property>
+		<property name="refreshAge">
+			<value value="1" class="Long"/>
+		</property>
+	</component>
+	
+	<component name="rangeQuery2edge" isSingleton="true" class="org.jage.query.RecordingQuery">
+		<list name="constraintsList">
+			<component name="rangeEntry2edge" isSingleton="true" class="org.jage.query.ConstraintEntry">
+				<property name="propertyName">
+					<value value="staticFactor" class="String"/>
+				</property>
+				<property name="constraint">
+					<reference target="rangeConstraint2edge"/>
+				</property>
+				
+				<component name="rangeConstraint2edge" isSingleton="true" class="org.jage.query.RangeConstraint">
+					<property name="lowestValue">
+						<value value="50" class="Short"/>
+					</property>
+					<property name="highestValue">
+						<value value="5000" class="Long"/>
+					</property>
+					<property name="isLowestEqual">
+						<value value="false" class="Boolean"/>
+					</property>
+					<property name="isHighestEqual">
+						<value value="false" class="Boolean"/>
+					</property>
+				</component>
+			</component>
+			
+			<reference target="rangeEntry2edge"/>
+		</list>
+		
+		<property name="constraints">
+			<reference target="constraintsList"/>
+		</property>
+		<property name="resultClass">
+			<value value="queryResult" class="String"/>
+		</property>
+	</component>
+	
+	<component name="range3" isSingleton="true" class="org.jage.query.QueryStepCache">
+		<property name="query">
+			<reference target="rangeQuery3"/>
+		</property>
+		<property name="refreshAge">
+			<value value="1" class="Long"/>
+		</property>
+	</component>
+	
+	<component name="rangeQuery3" isSingleton="true" class="org.jage.query.RecordingQuery">
+		<list name="constraintsList">
+			<component name="rangeEntry3" isSingleton="true" class="org.jage.query.ConstraintEntry">
+				<property name="propertyName">
+					<value value="staticFactor" class="String"/>
+				</property>
+				<property name="constraint">
+					<reference target="rangeConstraint3"/>
+				</property>
+				
+				<component name="rangeConstraint3" isSingleton="true" class="org.jage.query.RangeConstraint">
+					<property name="lowestValue">
+						<value value="50" class="Short"/>
+					</property>
+					<property name="highestValue">
+						<value value="5000" class="Long"/>
+					</property>
+					<property name="isLowestEqual">
+						<value value="true" class="Boolean"/>
+					</property>
+					<property name="isHighestEqual">
+						<value value="false" class="Boolean"/>
+					</property>
+				</component>
+			</component>
+			
+			<reference target="rangeEntry3"/>
+		</list>
+		
+		<property name="constraints">
+			<reference target="constraintsList"/>
+		</property>
+		<property name="resultClass">
+			<value value="queryResult" class="String"/>
+		</property>
+	</component>
+	
+	<component name="range3edge" isSingleton="true" class="org.jage.query.QueryStepCache">
+		<property name="query">
+			<reference target="rangeQuery3edge"/>
+		</property>
+		<property name="refreshAge">
+			<value value="1" class="Long"/>
+		</property>
+	</component>
+	
+	<component name="rangeQuery3edge" isSingleton="true" class="org.jage.query.RecordingQuery">
+		<list name="constraintsList">
+			<component name="rangeEntry3edge" isSingleton="true" class="org.jage.query.ConstraintEntry">
+				<property name="propertyName">
+					<value value="staticFactor" class="String"/>
+				</property>
+				<property name="constraint">
+					<reference target="rangeConstraint3edge"/>
+				</property>
+				
+				<component name="rangeConstraint3edge" isSingleton="true" class="org.jage.query.RangeConstraint">
+					<property name="lowestValue">
+						<value value="50" class="Integer"/>
+					</property>
+					<property name="highestValue">
+						<value value="500" class="Long"/>
+					</property>
+					<property name="isLowestEqual">
+						<value value="false" class="Boolean"/>
+					</property>
+					<property name="isHighestEqual">
+						<value value="false" class="Boolean"/>
+					</property>
+				</component>
+			</component>
+			
+			<reference target="rangeEntry3edge"/>
+		</list>
+		
+		<property name="constraints">
+			<reference target="constraintsList"/>
+		</property>
+		<property name="resultClass">
+			<value value="queryResult" class="String"/>
+		</property>
+	</component>
+	
+	<component name="pattern1" isSingleton="true" class="org.jage.query.QueryStepCache">
+		<property name="query">
+			<reference target="patternQuery1"/>
+		</property>
+		<property name="refreshAge">
+			<value value="1" class="Long"/>
+		</property>
+	</component>
+	
+	<component name="patternQuery1" isSingleton="true" class="org.jage.query.RecordingQuery">
+		<list name="constraintsList">
+			<component name="patternEntry1" isSingleton="true" class="org.jage.query.ConstraintEntry">
+				<property name="propertyName">
+					<value value="description" class="String"/>
+				</property>
+				<property name="constraint">
+					<reference target="patternConstraint1"/>
+				</property>
+				
+				<component name="patternConstraint1" isSingleton="true" class="org.jage.query.PatternConstraint">
+					<property name="pattern">
+						<value value=".*new.*" class="String"/>
+					</property>
+				</component>
+			</component>
+			
+			<reference target="patternEntry1"/>
+		</list>
+		
+		<property name="constraints">
+			<reference target="constraintsList"/>
+		</property>
+		<property name="resultClass">
+			<value value="queryResult" class="String"/>
+		</property>
+	</component>
+	
+	<component name="pattern2" isSingleton="true" class="org.jage.query.QueryStepCache">
+		<property name="query">
+			<reference target="patternQuery2"/>
+		</property>
+		<property name="refreshAge">
+			<value value="1" class="Long"/>
+		</property>
+	</component>
+	
+	<component name="patternQuery2" isSingleton="true" class="org.jage.query.RecordingQuery">
+		<list name="constraintsList">
+			<component name="patternEntry2" isSingleton="true" class="org.jage.query.ConstraintEntry">
+				<property name="propertyName">
+					<value value="description" class="String"/>
+				</property>
+				<property name="constraint">
+					<reference target="patternConstraint2"/>
+				</property>
+				
+				<component name="patternConstraint2" isSingleton="true" class="org.jage.query.PatternConstraint">
+					<property name="pattern">
+						<value value="hello world" class="String"/>
+					</property>
+				</component>
+			</component>
+			
+			<reference target="patternEntry2"/>
+		</list>
+		
+		<property name="constraints">
+			<reference target="constraintsList"/>
+		</property>
+		<property name="resultClass">
+			<value value="queryResult" class="String"/>
+		</property>
+	</component>
+	
+	<component name="value" isSingleton="true" class="org.jage.query.QueryStepCache">
+		<property name="query">
+			<reference target="valueQuery"/>
+		</property>
+		<property name="refreshAge">
+			<value value="1" class="Long"/>
+		</property>
+	</component>
+	
+	<component name="valueQuery" isSingleton="true" class="org.jage.query.RecordingQuery">
+		<list name="constraintsList">
+			<component name="valueEntry" isSingleton="true" class="org.jage.query.ConstraintEntry">
+				<property name="propertyName">
+					<value value="upperLimit" class="String"/>
+				</property>
+				<property name="constraint">
+					<reference target="valueConstraint"/>
+				</property>
+				
+				<component name="valueConstraint" isSingleton="true" class="org.jage.query.ValueConstraint">
+					<property name="value">
+						<value value="100" class="Long"/>
+					</property>
+				</component>
+			</component>
+			
+			<reference target="valueEntry"/>
+		</list>
+		
+		<property name="constraints">
+			<reference target="constraintsList"/>
+		</property>
+		<property name="resultClass">
+			<value value="queryResult" class="String"/>
+		</property>
+	</component>
+	
+	<component name="function" isSingleton="true" class="org.jage.query.QueryStepCache">
+		<property name="query">
+			<reference target="functionQuery"/>
+		</property>
+		<property name="refreshAge">
+			<value value="1" class="Long"/>
+		</property>
+	</component>
+	
+	<component name="functionQuery" isSingleton="true" class="org.jage.query.RecordingQuery">
+		<list name="functionsList">
+			<component name="queryFunction1" isSingleton="true" class="org.jage.query.PlainQueryFunction"/>
+			<reference target="queryFunction1"/>
+		</list>
+		
+		<property name="functions">
+			<reference target="functionsList"/>
+		</property>
+		<property name="resultClass">
+			<value value="queryResult" class="String"/>
+		</property>
+	</component>
+	
+</configuration>

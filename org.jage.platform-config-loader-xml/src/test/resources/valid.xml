@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+
+	<component name="innerComponent" class="org.jage.platform.component.definition.ClassWithProperties" isSingleton="true"/>
+	<agent name="innerAgent" class="org.jage.platform.component.definition.ClassWithProperties"/>
+    <strategy name="innerStrategy" class="org.jage.platform.component.definition.ClassWithProperties" />
+
+</configuration>

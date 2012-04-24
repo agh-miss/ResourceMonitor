@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component
+  class="org.jage.property.xml.testHelpers.AdvancedExampleComponent"
+  version="1.0.0" xmlns="org.jage"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="org.jage ageDependency.xsd">
+  <extends class="org.jage.property.xml.testHelpers.SimpleExampleComponent"/>
+  <declaration>
+    <attribute access="setter" modifier="2" name="intProperty" required="true" getter="getIntProperty" setter="setIntProperty">
+      <type>
+        <primitive name="int"/>
+      </type>
+    </attribute>
+    <attribute access="setter" modifier="2" name="stringProperty" required="true" getter="getStringProperty" setter="setStringProperty">
+      <type>
+        <simpleClass class="java.lang.String" interface="false"/>
+      </type>
+    </attribute>
+    <attribute access="setter" modifier="2"
+      name="changesNotifierProperty2" required="true" getter="getChangesNotifier">
+      <type>
+        <simpleClass
+          class="org.jage.property.testHelpers.ChangesNotifierStub" interface="false"/>
+      </type>
+    </attribute>
+    <attribute access="direct" modifier="2"
+      name="changesNotifierProperty" fieldName="_changesNotifierProperty" required="true">
+      <type>
+        <simpleClass
+          class="org.jage.property.testHelpers.ChangesNotifierStub" interface="false"/>
+      </type>
+    </attribute>
+    <attribute access="direct" modifier="2" name="floatProperty" fieldName="_floatProperty" required="true">
+      <type>
+        <primitive name="float"/>
+      </type>
+    </attribute>
+    <attribute access="direct" modifier="2" name="objectProperty" fieldName="_objectProperty" required="true">
+      <type>
+        <simpleClass class="java.lang.Object" interface="false"/>
+      </type>
+    </attribute>
+    <attribute access="direct" modifier="2"
+      name="monitorableObjectProperty" fieldName="_monitorableObjectProperty" required="true" setter="setMonitorableObjectPropertyValue">
+      <type>
+        <simpleClass class="java.lang.Object" interface="false"/>
+      </type>
+    </attribute>
+    <attribute access="direct" modifier="2"
+      name="monitorableStringProperty" fieldName="_monitorableStringProperty" required="true">
+      <type>
+        <simpleClass class="java.lang.String" interface="false"/>
+      </type>
+    </attribute>
+    <attribute access="direct" modifier="2"
+      name="normalList" fieldName="_normalList" required="true">
+      <type>
+      	<parameterized class="java.util.List" interface="true" special="list">
+      		<type>
+        		<simpleClass class="org.jage.property.xml.testHelpers.NormalComponent" interface="false"/>
+        	</type>
+        </parameterized>
+      </type>
+    </attribute>
+  </declaration>
+</component>

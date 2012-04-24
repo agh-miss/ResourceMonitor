@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>starter-batch-single</artifactId>
+
+	<name>jAgE services - batch starter </name>
+	<description>Batch mode implementation of Stater for a single computation</description>
+	<url>http://age.iisg.agh.edu.pl/jage/services/starter-batch-single/</url>
+
+	<parent>
+		<groupId>org.jage.services</groupId>
+		<artifactId>services</artifactId>
+		<version>2.6.0-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jage.platform</groupId>
+			<artifactId>component</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jage.platform</groupId>
+			<artifactId>node</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jage.platform</groupId>
+			<artifactId>config</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jage.platform</groupId>
+			<artifactId>config-loader-xml</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jage.platform</groupId>
+			<artifactId>starter</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+</project>

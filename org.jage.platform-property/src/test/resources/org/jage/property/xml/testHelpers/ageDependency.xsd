@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="org.jage"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" xmlns="org.jage">
+
+	<xsd:complexType name="component">
+		<xsd:sequence>
+			<xsd:element name="extends" type="extends" maxOccurs="1" minOccurs="0" />
+			<xsd:element name="implements" type="implements" maxOccurs="unbounded" minOccurs="0" />
+			<xsd:element name="requires" type="requires" maxOccurs="unbounded" minOccurs="0" />
+			<xsd:element name="declaration" type="declaration" maxOccurs="1" minOccurs="1" />
+		</xsd:sequence>
+		<xsd:attribute name="class" type="xsd:string" use="required" />
+		<xsd:attribute name="version" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:element name="component" type="component" />
+
+	<xsd:complexType name="extends">
+		<xsd:attribute name="class" type="xsd:string" use="required" />
+		<xsd:attribute name="version" type="xsd:string" />
+	</xsd:complexType>
+
+	<xsd:complexType name="implements">
+		<xsd:attribute name="class" type="xsd:string" use="required" />
+		<xsd:attribute name="version" type="xsd:string" />
+	</xsd:complexType>
+
+	<xsd:complexType name="requires">
+		<xsd:attribute name="class" type="xsd:string" use="required" />
+		<xsd:attribute name="version" type="xsd:string" />
+	</xsd:complexType>
+
+	<xsd:complexType name="declaration">
+		<xsd:sequence>
+			<xsd:element name="attribute" type="attribute" maxOccurs="unbounded" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="type">
+		<xsd:choice maxOccurs="1" minOccurs="1">
+			<xsd:element name="primitive" type="primitive" />
+			<xsd:element name="simpleClass" type="simpleClass" />
+			<xsd:element name="parameterized" type="parameterized" />
+			<xsd:element name="array" type="array" />
+		</xsd:choice>
+	</xsd:complexType>
+
+	<xsd:complexType name="parameterized">
+		<xsd:choice maxOccurs="2" minOccurs="1">
+			<xsd:element name="type" type="type" />
+			<xsd:element name="wildcard" type="wildcard" />
+		</xsd:choice>
+		<xsd:attribute name="class" type="xsd:string" use="required" />
+		<xsd:attribute name="interface" type="xsd:boolean" />
+		<xsd:attribute name="special">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="list" />
+					<xsd:enumeration value="set" />
+					<xsd:enumeration value="map" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="array">
+		<xsd:sequence>
+			<xsd:element name="type" type="type" maxOccurs="1" minOccurs="1" />
+		</xsd:sequence>
+		<xsd:attribute name="dims" type="xsd:int" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="attribute">
+		<xsd:sequence>
+			<xsd:element name="type" type="type" maxOccurs="1" minOccurs="1" />
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="modifier" type="xsd:int" use="optional" />
+		<xsd:attribute name="access">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="direct" />
+					<xsd:enumeration value="setter" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="required" type="xsd:boolean" />
+		<xsd:attribute name="setter" type="xsd:string" />
+		<xsd:attribute name="getter" type="xsd:string" />
+		<xsd:attribute name="fieldName" type="xsd:string" />
+	</xsd:complexType>
+
+	<xsd:complexType name="primitive">
+		<xsd:attribute name="name" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="int" />
+					<xsd:enumeration value="byte" />
+					<xsd:enumeration value="short" />
+					<xsd:enumeration value="long" />
+					<xsd:enumeration value="float" />
+					<xsd:enumeration value="double" />
+					<xsd:enumeration value="char" />
+					<xsd:enumeration value="boolean" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="value" type="xsd:string" />
+	</xsd:complexType>
+
+	<xsd:complexType name="wildcard">
+		<xsd:choice minOccurs="1" maxOccurs="2">
+			<xsd:element name="lower" type="lower" maxOccurs="1" minOccurs="0" />
+			<xsd:element name="upper" type="upper" maxOccurs="1" minOccurs="0" />
+		</xsd:choice>
+	</xsd:complexType>
+
+	<xsd:complexType name="lower">
+		<xsd:sequence>
+			<xsd:element name="type" type="type" maxOccurs="unbounded" minOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="upper">
+		<xsd:sequence>
+			<xsd:element name="type" type="type" maxOccurs="unbounded" minOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="simpleClass">
+		<xsd:attribute name="class" type="xsd:string" />
+		<xsd:attribute name="interface" type="xsd:boolean" />
+		<xsd:attribute name="special">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="list" />
+					<xsd:enumeration value="set" />
+					<xsd:enumeration value="map" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+</xsd:schema>

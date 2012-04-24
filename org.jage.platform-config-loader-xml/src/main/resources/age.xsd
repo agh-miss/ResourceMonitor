@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- schema of configuration files for jAgE 2.5 -->
+<xsd:schema targetNamespace="http://age.iisg.agh.edu.pl/AgE/2.5"
+	elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://age.iisg.agh.edu.pl/AgE/2.5">
+
+	<xsd:simpleType name="valueType">
+		<xsd:annotation>
+			<xsd:documentation></xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="String"></xsd:enumeration>
+			<xsd:enumeration value="Integer"></xsd:enumeration>
+			<xsd:enumeration value="Long"></xsd:enumeration>
+			<xsd:enumeration value="Short"></xsd:enumeration>
+			<xsd:enumeration value="Byte"></xsd:enumeration>
+			<xsd:enumeration value="Boolean"></xsd:enumeration>
+			<xsd:enumeration value="Float"></xsd:enumeration>
+			<xsd:enumeration value="Double"></xsd:enumeration>
+			<xsd:enumeration value="Class"></xsd:enumeration>
+			<xsd:enumeration value="AgentAddress"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="value">
+		<xsd:annotation>
+			<xsd:documentation>
+				Element &lt;value/&gt; jest używany do uzyskania pewnej
+				wartości potrzebnej do stworzenia obiektu i za jego
+				pomocą można określić konkretną wartość jednego z kilku
+				typów prostych. Musi on posiadać dwa atrybuty: class,
+				określający typ wartości, oraz value, zawierający
+				zakodowaną w postaci łańcucha tekstowego wartość.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="class" type="valueType"></xsd:attribute>
+		<xsd:attribute name="value" type="xsd:string"></xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="reference">
+		<xsd:annotation>
+			<xsd:documentation>
+				Element &lt;reference/&gt;, podobnie do elementu
+				&lt;value/&gt;, jest używany do uzyskania pewnej
+				wartości potrzebnej do stworzenia obiektu, jednak zwraca
+				on referencję do innego, zdefiniowanego w konfiguracji
+				obiektu. Musi on posiadać pojedynczy atrybut target,
+				który określa nazwę obiektu, do którego się odwołuje.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="target" type="xsd:string" use="required"></xsd:attribute>
+		<xsd:attribute name="class" type="xsd:string" use="optional"></xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="constructor-arg">
+		<xsd:annotation>
+			<xsd:documentation>
+				Elementy &lt;constructor-arg/&gt; służą do określenia,
+				jakie wartości należy przekazać do konstruktora obiektu.
+				W przeciwieństwie do wszystkich innych elementów
+				konfiguracji, kolejność zdefiniowania elementów
+				&lt;constructor-arg/&gt; jest istotna, gdyż argumenty
+				zostaną przekazane w takiej kolejności, w jakiej
+				wystąpiły w konfiguracji. Podobnie jak w przypadku
+				&lt;property/&gt;, jedynym elementem potomnym musi być
+				element &lt;value/&gt; lub &lt;reference/&gt;.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice minOccurs="1" maxOccurs="1">
+			<xsd:element name="value" type="value"></xsd:element>
+			<xsd:element name="reference" type="reference"></xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+
+	<xsd:complexType name="property">
+		<xsd:annotation>
+			<xsd:documentation>
+				Element &lt;property/&gt; służy do ustawienia
+				właściwości (rozumianej jako właściwość AgE'a) obiektu.
+				Musi on posiadać atrybut name, określający nazwę
+				właściwości. Jedynym elementem potomnym musi być element
+				&lt;value/&gt; lub &lt;reference/&gt;, który definiuje
+				przypisywaną wartość.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice minOccurs="1" maxOccurs="1">
+			<xsd:element name="value" type="value"></xsd:element>
+			<xsd:element name="reference" type="reference"></xsd:element>
+		</xsd:choice>
+		<xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="include">
+		<xsd:annotation>
+			<xsd:documentation>
+				Element &lt;include/&gt; służy do wstawienia w podanym
+				miejscu elementów z innego dokumentu XML i umożliwia
+				umieszczenie pojedynczej konfiguracji w wielu plikach.
+				Obowiązkowy atrybut file określa nazwę pliku XML. W
+				miejscu wystąpienia elementu &lt;include/&gt; nie jest
+				wstawiany element główny wskazanego dokumentu, lecz
+				wszystkie jego elementy potomne.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="file" type="xsd:string"></xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="Component">
+        <xsd:annotation>
+        	<xsd:documentation>A component with its singleton state specified. Should be used if built-in 'agent' and 'strategy' tags do not apply.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+			<xsd:extension base="BasicComponent">
+				<xsd:attribute name="isSingleton" type="xsd:boolean" use="optional">
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="array">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="value" type="value" minOccurs="0"
+				maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="reference" type="multiReference"
+				minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:group ref="DefinableElements"></xsd:group>
+		</xsd:sequence>
+		<xsd:attribute name="isSingleton" type="xsd:boolean"
+			use="optional">
+		</xsd:attribute>
+		<xsd:attribute name="name" type="xsd:string" use="required"></xsd:attribute>
+		<xsd:attribute name="type" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					A 'type' parameter specifies a component type of an array.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="list">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="value" type="value" minOccurs="0"
+				maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="reference" type="multiReference"
+				minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:group ref="DefinableElements"></xsd:group>
+		</xsd:sequence>
+		<xsd:attribute name="isSingleton" type="xsd:boolean"
+			use="optional">
+		</xsd:attribute>
+        <xsd:attribute name="name" type="xsd:string" use="required"></xsd:attribute>
+        <xsd:attribute name="type" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					A 'type' parameter specifies a generic type of a list.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="set">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="value" type="value" minOccurs="0"
+				maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="reference" type="multiReference"
+				minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:group ref="DefinableElements"></xsd:group>
+		</xsd:sequence>
+		<xsd:attribute name="isSingleton" type="xsd:boolean"
+			use="optional">
+		</xsd:attribute>
+        <xsd:attribute name="name" type="xsd:string" use="required"></xsd:attribute>
+        <xsd:attribute name="type" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					A 'type' parameter specifies a generic type of a set.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:group name="DefinableElements">
+        <xsd:annotation>
+        	<xsd:documentation>All elements that can be included within other elements' definitions.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="component" type="Component" minOccurs="0"
+                maxOccurs="1">
+            </xsd:element>
+            <xsd:element name="agent" type="BasicComponent"
+                minOccurs="0"
+                maxOccurs="1">
+            </xsd:element>
+            <xsd:element name="strategy" type="BasicComponent"
+                minOccurs="0"
+                maxOccurs="1">
+            </xsd:element>
+            <xsd:element name="array" type="array" minOccurs="0"
+                maxOccurs="1">
+            </xsd:element>
+            <xsd:element name="list" type="list" minOccurs="0"
+                maxOccurs="1">
+            </xsd:element>
+            <xsd:element name="set" type="set" minOccurs="0"
+                maxOccurs="1">
+            </xsd:element>
+            <xsd:element name="map" type="map" minOccurs="0" maxOccurs="1"></xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+
+	<xsd:complexType name="itemKey">
+		<xsd:sequence maxOccurs="1" minOccurs="1">
+			<xsd:element name="value" type="value"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="itemValue">
+		<xsd:choice maxOccurs="1" minOccurs="1">
+			<xsd:element name="reference" type="reference"></xsd:element>
+			<xsd:element name="value" type="value"></xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+
+	<xsd:complexType name="item">
+        <xsd:annotation>
+        	<xsd:documentation>An item of a map. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+			<xsd:element name="itemKey" type="itemKey" maxOccurs="1"
+				minOccurs="1">
+			</xsd:element>
+			<xsd:element name="itemValue" type="itemValue" maxOccurs="1"
+				minOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="map">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="item" type="item" minOccurs="0"
+				maxOccurs="1">
+			</xsd:element>
+			<xsd:group ref="DefinableElements"></xsd:group>
+		</xsd:sequence>
+		<xsd:attribute name="isSingleton" type="xsd:boolean"
+			use="optional">
+		</xsd:attribute>
+        <xsd:attribute name="name" type="xsd:string" use="required"></xsd:attribute>
+        <xsd:attribute name="keyType" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					A 'keyType' parameter specifies a generic type of a map key.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="valueType" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					A 'keyType' parameter specifies a generic type of a map value.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="BasicComponent">
+        <xsd:annotation>
+        	<xsd:documentation>A basic component type - used for 'agent' and 'strategy' tags.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="include" type="include" minOccurs="0"
+				maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="constructor-arg" type="constructor-arg"
+				minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="property" type="property" minOccurs="0"
+				maxOccurs="1">
+			</xsd:element>
+			<xsd:group ref="DefinableElements"></xsd:group>
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+		<xsd:attribute name="class" type="xsd:string"></xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:element name="configuration" type="configuration"></xsd:element>
+
+	<xsd:complexType name="configuration">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="include" type="include" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+            <xsd:element name="component" type="Component" minOccurs="0"
+				maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="agent" type="BasicComponent" minOccurs="0"
+                maxOccurs="1"></xsd:element>
+            <xsd:element name="strategy" type="BasicComponent" minOccurs="0"
+                maxOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="multiReference">
+		<xsd:attribute name="target" type="xsd:string"></xsd:attribute>
+        <xsd:attribute name="count" use="optional" type="xsd:int"></xsd:attribute>
+	</xsd:complexType>
+</xsd:schema>

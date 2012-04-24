@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+
+	<component name="outerComponent" class="org.jage.platform.component.definition.ClassWithProperties" isSingleton="true">
+		<constructor-arg><value class="String" value="ABC"/></constructor-arg>
+		<constructor-arg><value class="Integer" value="123"/></constructor-arg>
+
+		<property name="a"><value class="Integer" value="4"/></property>
+		<property name="b"><value class="Float" value="3.14"/></property>
+		<property name="list"><reference target="list"/></property>
+		<property name="map"><reference target="map"/></property>
+		<property name="set"><reference target="set"/></property>
+		<property name="objectArray"><reference target="objectArray"/></property>
+		<property name="longArray"><reference target="longArray"/></property>
+
+		<include file="classpath:valid.xml"/>
+
+		<list name="list" isSingleton="true">
+			<reference target="innerComponent"/>
+			<reference target="innerAgent"/>
+		</list>
+
+		<map name="map" isSingleton="true">
+			<item>
+				<itemKey><value class="String" value="2"/></itemKey>
+				<itemValue><reference target="innerComponent"/></itemValue>
+			</item>
+			<item>
+				<itemKey><value class="String" value="1"/></itemKey>
+				<itemValue><reference target="innerAgent"/></itemValue>
+			</item>
+		</map>
+
+		<set name="set" isSingleton="true">
+			<reference target="innerComponent"/>
+			<value class="Integer" value="2"/>
+		</set>
+
+		<array name="objectArray" isSingleton="true" type="Object">
+			<reference target="innerComponent"/>
+			<value class="Integer" value="2"/>
+		</array>
+
+		<array name="longArray" isSingleton="true" type="Long">
+			<value class="Long" value="2" />
+			<value class="Long" value="4" />
+			<value class="Long" value="8" />
+		</array>
+	</component>
+</configuration>

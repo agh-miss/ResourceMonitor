@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+	<component name="innercomponent1" class="org.jage.platform.component.definition.ClassWithProperties"
+		isSingleton="true">
+		<property name="a">
+			<value class="Integer" value="123"/>
+		</property>
+	</component>
+	<agent name="innercomponent2" class="org.jage.platform.component.definition.ClassWithProperties">
+		<property name="a">
+			<value class="Integer" value="-94"/>
+		</property>
+	</agent>
+	
+	<agent name="obj1" class="org.jage.platform.component.definition.ClassWithProperties">
+		<property name="a">
+			<value class="Integer" value="1234"/>
+		</property>
+	</agent>
+	<agent name="obj2" class="org.jage.platform.component.definition.ClassWithProperties">
+		<constructor-arg>
+			<value class="String" value="ABC"/>
+		</constructor-arg>
+		<constructor-arg>
+			<value class="Integer" value="123"/>
+		</constructor-arg>
+		
+		<property name="b">
+			<value class="Float" value="5678"/>
+		</property>
+		 
+		<list name="myList" isSingleton="true">
+			<reference target="innercomponent1"/>
+			<reference target="innercomponent2"/>
+		</list>
+		<property name="list">
+			<reference target="myList"/>
+		</property>
+	</agent>
+</configuration>

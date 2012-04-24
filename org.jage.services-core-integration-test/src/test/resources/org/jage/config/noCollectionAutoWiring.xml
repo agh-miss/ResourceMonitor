@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+
+	<agent name="outerObject" class="org.jage.platform.component.definition.ClassWithProperties">
+		<agent name="innerObject1" class="org.jage.platform.component.definition.ClassWithProperties" />
+		<agent name="innerObject2" class="org.jage.platform.component.definition.ClassWithProperties" />
+        <agent name="multiListObject" class="org.jage.platform.component.definition.ClassWithProperties"/>
+        <agent name="multiSetObject" class="org.jage.platform.component.definition.ClassWithProperties"/>
+
+		<constructor-arg>
+			<value class="String" value="ABC" />
+		</constructor-arg>
+		<constructor-arg>
+			<value class="Integer" value="123" />
+		</constructor-arg>
+
+		<list name="myList" isSingleton="true">
+			<reference target="innerObject1" />
+			<reference target="innerObject2" />
+			<reference target="multiListObject" count="50" />
+		</list>
+
+		<map name="myMap" isSingleton="true">
+			<item>
+				<itemKey>
+					<value class="String" value="2" />
+				</itemKey>
+				<itemValue>
+					<reference target="innerObject2" />
+				</itemValue>
+			</item>
+			<item>
+				<itemKey>
+					<value class="String" value="1" />
+				</itemKey>
+				<itemValue>
+					<reference target="innerObject1" />
+				</itemValue>
+			</item>
+		</map>
+
+		<set name="mySet" isSingleton="true">
+			<reference target="innerObject2" />
+			<value class="Integer" value="2" />
+			<reference target="multiSetObject" count="20" />
+		</set>
+
+		<property name="a">
+			<value class="Integer" value="4" />
+		</property>
+		<property name="b">
+			<value class="Float" value="3.14" />
+		</property>
+		<property name="list">
+			<reference target="myList" />
+		</property>
+		<property name="map">
+			<reference target="myMap" />
+		</property>
+		<property name="set">
+			<reference target="mySet" />
+		</property>
+	</agent>
+
+</configuration>

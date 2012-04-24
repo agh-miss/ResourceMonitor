@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>communication</artifactId>
+
+	<name>jAgE services - communication service</name>
+	<description>jAgE communication service interface</description>
+	<url>http://age.iisg.agh.edu.pl/jage/services/communication/</url>
+
+	<parent>
+		<groupId>org.jage.services</groupId>
+		<artifactId>services</artifactId>
+		<version>2.6.0-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>address</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+				
+		<dependency>
+			<groupId>org.jage.platform</groupId>
+			<artifactId>node</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jage.platform</groupId>
+			<artifactId>component</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+</project>

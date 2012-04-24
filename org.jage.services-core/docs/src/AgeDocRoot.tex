@@ -1,0 +1,86 @@
+\documentclass{mgragh} % opcje: robocza,man
+\usepackage[cp1250]{inputenc}  % opcja latin2 dla Linuxa lub cp1250 dla Windows
+% \usepackage{amsmath}           % ³atwiejszy sk³ad matematyki
+% \usepackage{amssymb} 
+
+\usepackage[polish]{babel}
+\usepackage[OT4]{fontenc}
+\usepackage{polski}
+%%
+%%
+\makeindex 
+
+\bibliographystyle{ddabbrv}
+%\nocite{*}
+
+\begin{document}
+%%
+%%
+%% ======== METRYCZKA PRACY ========
+\title{AgE - Agentowa œrodowisko obliczeniowe}
+\subtitle{wersja 2.1.0}
+\author{Kamil Piêtak, Adam Woœ}
+\uczelniaNazwa{Akademia Górniczo-Hutnicza}
+\uczelniaImienia{im. Stanis³awa Staszica}
+\wydzial{Wydzia³ Elektrotechniki, Automatyki, Informatyki i Elektroniki }
+\rok{2008}
+
+\maketitle
+%%
+
+%%
+%%
+%% ======== NASZE MAKRA ========
+%%
+\input{AgeDocDef}
+%%
+%% ======== SPIS TREŒCI ========
+%%
+\tableofcontents
+%%
+%% ======== STRESZCZENIE PRACY (POLSKIE) ========
+\begin{licencja}
+%%
+\input{AgeDocLic}
+%%
+\end{licencja}
+%%
+
+%%
+%% ======== G£ÓWNA CZÊŒÆ PRACY ========
+%%
+%% ==== WSTÊP ====
+%%
+\begin{wstep}
+%%
+\input{AgeDoc_Intro}
+%%
+\end{wstep}
+%%
+%% ==== ROZDZIA£ 1 ====
+%%
+%% A tutaj tak dla przyk³adu jest \part
+\part{Musztarda kotwiczna}
+
+\chapter{Wprowadzenie do przypraw walcowych}
+%%
+ \input{AgeDoc_Ch1}
+%%
+\mgrclosechapter
+%%
+%% ==== ROZDZIA£ 2 ====
+%%
+ \input{AgeDoc_Ch2}
+%%
+%%
+%% ======== BIBLIOGRAFIA ========
+%%
+%\input{AgeDoc_Lit}
+%%
+%% ======== DODATKOWE ELEMENTY (nieobowi¹zkowe) ======== 
+%%
+%\printindex  
+%%
+
+\end{document}
+

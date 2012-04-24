@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>org.jage.algorithms-emas-app</name>
+	<comment>EMAS algorithm. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
+	<projects>
+		<project>org.jage.algorithms-emas</project>
+		<project>org.jage.algorithms-common</project>
+		<project>org.jage.algorithms-random</project>
+		<project>org.jage.services-core</project>
+		<project>org.jage.services-address</project>
+		<project>org.jage.services-communication</project>
+		<project>org.jage.platform-node</project>
+		<project>org.jage.platform-component</project>
+		<project>org.jage.platform-component-pico</project>
+		<project>org.jage.platform-util</project>
+		<project>org.jage.platform-config</project>
+		<project>org.jage.platform-property</project>
+		<project>org.jage.algorithms-real-valued</project>
+		<project>org.jage.algorithms-genetic</project>
+		<project>org.jage.platform-node-default</project>
+		<project>org.jage.platform-starter</project>
+		<project>org.jage.services-starter-batch-single</project>
+		<project>org.jage.platform-config-loader-xml</project>
+		<project>org.jage.services-naming</project>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+</projectDescription>

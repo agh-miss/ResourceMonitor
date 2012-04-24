@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<myconfig>
+	<description>My description</description>
+	<amount>33</amount>
+	<dimensions plain="true">
+		<width>12</width>
+		<height>10</height>
+		<depth>2</depth>
+	</dimensions>
+</myconfig>

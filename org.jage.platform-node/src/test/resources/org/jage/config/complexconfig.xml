@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<myconfig>
+	<description>
+		<line>Complex config</line>
+		<line>Test</line>
+		<line>EmptyLine</line>
+	</description>
+	<amount class="java.lang.Integer">
+		<constructor>
+			<parameter>33</parameter>
+		</constructor>
+	</amount>
+	<dimensions class="org.jage.config.ConfigTestDimensions">
+		<width>12</width>
+		<height>10</height>
+		<depth>2</depth>
+	</dimensions>
+	
+	<newDimensions class="org.jage.config.ConfigTestExtendedDimensions">
+		<constructor>
+			<parameter>myId</parameter>
+		</constructor>
+		<width>12</width>
+		<height>10</height>
+		<depth>2</depth>
+	</newDimensions>
+</myconfig>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component
+  class="org.jage.property.xml.testHelpers.MultiBaseInheritComponent"
+  version="1.0.0" xmlns="org.jage"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="org.jage ageDependency.xsd">
+  <extends class="org.jage.property.xml.testHelpers.SimpleExampleComponent"/>
+  <extends class="org.jage.property.xml.testHelpers.AdvancedExampleComponent"/>
+  <declaration>
+    <attribute access="setter" modifier="2" name="intProperty" required="true" getter="getIntProperty" setter="setIntProperty">
+      <type>
+        <primitive name="int"/>
+      </type>
+    </attribute>
+    <attribute access="setter" modifier="2" name="stringProperty" required="true" getter="getStringProperty" setter="setStringProperty">
+      <type>
+        <simpleClass class="java.lang.String" interface="false"/>
+      </type>
+    </attribute>
+  </declaration>
+</component>

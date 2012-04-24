@@ -1,0 +1,32 @@
+<book>
+  <id>jAgE</id>
+  <title>jAgE 2.1.0 - dokumentacja</title>
+  <author>Kamil Piêtak, Adam Woœ</author>
+  <chapters>
+    <chapter>
+      <id>ch-model</id>
+      <title>Model platformy jAgE</title>
+	  <sections>
+		<section><id>model</id></section>
+	  </sections>
+    </chapter>
+    <chapter>
+      <id>ch-config</id>
+      <title>Konfiguracja Workplace'a (docelowo konfiguracja platformy jAgE)</title>
+      <sections>
+        <section>
+          <id>config-intro</id>
+        </section>
+		<section>
+		  <id>config-work</id>
+        </section>
+		<section>
+		  <id>config-file</id>
+		</section>
+		<section>
+		  <id>config-hierarchy</id>
+		</section>
+      </sections>
+    </chapter>
+  </chapters>
+</book>
