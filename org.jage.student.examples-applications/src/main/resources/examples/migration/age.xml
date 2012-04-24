@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+
+	<component name="workplaceManager" class="org.jage.pico.PicoWorkplaceManager" isSingleton="true">
+		<component name="addressProvider" class="org.jage.address.provider.DefaultAgentAddressProvider" isSingleton="true" />
+
+		<list name="workplaces">
+			<agent name="workplace" class="org.jage.workplace.IsolatedSimpleWorkplace">
+				<property name="nameInitializer">
+					<value value="workplace" class="String" />
+				</property>
+
+				<list name="agents">
+
+					<agent name="rootSimpleAggregate" class="org.jage.agent.SimpleAggregate">
+						<property name="nameInitializer">
+							<value value="TheXFiles" class="String" />
+						</property>
+
+						<list name="simpleAgents">
+							<agent name="squeeze" class="org.jage.agent.SimpleAggregate">
+								<property name="nameInitializer">
+									<value value="Squeeze" class="String" />
+								</property>
+
+
+								<list name="agents">
+									<agent name="scully" class="org.jage.examples.migration.CrawlingSimpleAgent">
+										<property name="nameInitializer">
+											<value value="Scully" class="String" />
+										</property>
+
+									</agent>
+									<reference target="scully" />
+
+									<agent name="mulder" class="org.jage.examples.migration.CrawlingSimpleAgent">
+										<property name="nameInitializer">
+											<value value="Mulder" class="String" />
+										</property>
+
+									</agent>
+									<reference target="mulder" />
+								</list>
+								<property name="agents">
+									<reference target="agents" />
+								</property>
+							</agent>
+							<reference target="squeeze" />
+
+							<agent name="shadows" class="org.jage.agent.SimpleAggregate">
+								<property name="nameInitializer">
+									<value value="Shadows" class="String" />
+								</property>
+
+
+								<list name="agents">
+									<agent name="skinner" class="org.jage.examples.migration.CrawlingSimpleAgent">
+										<property name="nameInitializer">
+											<value value="Skinner" class="String" />
+										</property>
+
+									</agent>
+									<reference target="skinner" />
+								</list>
+								<property name="agents">
+									<reference target="agents" />
+								</property>
+							</agent>
+							<reference target="shadows" />
+
+
+							<agent name="space" class="org.jage.agent.SimpleAggregate">
+								<property name="nameInitializer">
+									<value value="Space" class="String" />
+								</property>
+
+								<list name="agents">
+									<agent name="doggett" class="org.jage.examples.migration.CrawlingSimpleAgent">
+										<property name="nameInitializer">
+											<value value="Doggett" class="String" />
+										</property>
+
+									</agent>
+									<reference target="doggett" />
+								</list>
+								<property name="agents">
+									<reference target="agents" />
+								</property>
+							</agent>
+							<reference target="space" />
+						</list>
+						<property name="agents">
+							<reference target="simpleAgents" />
+						</property>
+					</agent>
+					<reference target="rootSimpleAggregate" />
+				</list>
+				<property name="agents">
+					<reference target="agents" />
+				</property>
+			</agent>
+			<reference target="workplace" />
+		</list>
+		<property name="workplaces">
+			<reference target="workplaces" />
+		</property>
+
+		<component name="stopCondition" class="org.jage.workplace.FixedStepCountStopCondition" isSingleton="true">
+			<constructor-arg>
+				<value class="Long" value="100" />
+			</constructor-arg>
+		</component>
+
+	</component>
+
+</configuration>

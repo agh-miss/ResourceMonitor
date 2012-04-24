@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+	<agent name="workplace" class="org.jage.workplace.IsolatedSimpleWorkplace">
+		<component name="TheXFiles" class="org.jage.address.AgentAddress"
+			isSingleton="false">
+			<constructor-arg>
+				<value value="TheXFiles" class="String" />
+			</constructor-arg>
+		</component>
+		<property name="address">
+			<reference target="TheXFiles" />
+		</property>
+
+		<list name="agents">
+			<agent name="scully"
+				class="org.jage.examples.helloworld.HelloWorldSimpleAgent">
+				<component name="Scully" class="org.jage.address.AgentAddress"
+					isSingleton="false">
+					<constructor-arg>
+						<value value="Scully" class="String" />
+					</constructor-arg>
+				</component>
+				<property name="address">
+					<reference target="Scully" />
+				</property>
+			</agent>
+			<reference target="scully" />
+
+			<agent name="mulder"
+				class="org.jage.examples.helloworld.HelloWorldSimpleAgent">
+				<component name="Mulder" class="org.jage.address.AgentAddress"
+					isSingleton="false">
+					<constructor-arg>
+						<value value="Mulder" class="String" />
+					</constructor-arg>
+				</component>
+				<property name="address">
+					<reference target="Mulder" />
+				</property>
+			</agent>
+			<reference target="mulder" />
+
+		</list>
+		<property name="agents">
+			<reference target="agents" />
+		</property>
+	</agent>
+	
+	
+	
+</configuration>

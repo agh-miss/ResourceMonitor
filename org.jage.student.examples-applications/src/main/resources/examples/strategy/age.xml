@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+
+	<component name="workplaceManager" class="org.jage.pico.PicoWorkplaceManager" isSingleton="true">
+		<component name="addressProvider" class="org.jage.address.provider.DefaultAgentAddressProvider" isSingleton="true" />
+		<list name="workplaces">
+			<agent name="workplace" class="org.jage.workplace.IsolatedSimpleWorkplace">
+				<property name="nameInitializer">
+					<value value="TheXFiles" class="String" />
+				</property>
+
+				<list name="agents">
+					<agent name="echo123" class="org.jage.examples.strategy.StrategySimpleAgent">
+						<property name="nameInitializer">
+							<value value="echoEvery1" class="String" />
+						</property>
+						<property name="echoStr">
+							<reference target="customCounter" />
+						</property>
+					</agent>
+					<reference target="echo123" />
+
+					<agent name="echoABC" class="org.jage.examples.strategy.StrategySimpleAgent">
+						<property name="nameInitializer">
+							<value value="echoEvery2" class="String" />
+						</property>
+						<property name="echoStr">
+							<reference target="customCounter2" />
+						</property>
+					</agent>
+					<reference target="echoABC" />
+
+					<agent name="echoEcho" class="org.jage.examples.strategy.StrategySimpleAgent">
+						<property name="nameInitializer">
+							<value value="EchoABC" class="String" />
+						</property>
+						<property name="echoStr">
+							<reference target="echoAbcStrategy" />
+						</property>
+					</agent>
+					<reference target="echoEcho" />
+
+				</list>
+				<property name="agents">
+					<reference target="agents" />
+				</property>
+
+				<strategy name="echo123Strategy" class="org.jage.examples.strategy.Echo123Strategy" />
+				<strategy name="echoAbcStrategy" class="org.jage.examples.strategy.EchoAbcStrategy" />
+				<strategy name="counterStrategy" class="org.jage.examples.strategy.CounterEchoStrategy" />
+				<strategy name="customCounter2" class="org.jage.examples.strategy.CustomCounterEchoStrategy">
+					<property name="increment">
+						<value value="2" class="Integer" />
+					</property>
+				</strategy>
+				<strategy name="customCounter" class="org.jage.examples.strategy.CustomCounterEchoStrategy" />
+
+
+			</agent>
+			<reference target="workplace" />
+		</list>
+		<property name="workplaces">
+			<reference target="workplaces" />
+		</property>
+
+		<component name="stopCondition" class="org.jage.workplace.FixedStepCountStopCondition" isSingleton="true">
+			<constructor-arg>
+				<value class="Long" value="10" />
+			</constructor-arg>
+		</component>
+	</component>
+
+</configuration>

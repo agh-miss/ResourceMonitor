@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+	<agent name="workplace" class="org.jage.workplace.IsolatedSimpleWorkplace">
+		<property name="address">
+			<value value="TheXFiles" class="AgentAddress" />
+		</property>
+
+		<list name="agents">
+			<component name="scullyAddress" class="org.jage.address.AgentAddress"
+				isSingleton="true">
+				<constructor-arg>
+					<value class="String" value="Scully" />
+				</constructor-arg>
+			</component>
+			<agent name="scully" class="org.jage.examples.messages.MessagesSimpleAgent">
+
+				<property name="address">
+					<reference target="scullyAddress" />
+				</property>
+
+				<property name="message">
+					<value class="String" value="The Truth is Out There" />
+				</property>
+
+				<property name="receiver">
+					<reference target="mulderAddress"/>
+				</property>
+			</agent>
+			<reference target="scully" />
+
+			<component name="mulderAddress" class="org.jage.address.AgentAddress"
+				isSingleton="true">
+				<constructor-arg>
+					<value class="String" value="Mulder" />
+				</constructor-arg>
+			</component>
+			<agent name="mulder" class="org.jage.examples.messages.MessagesSimpleAgent">
+				<property name="address">
+					<reference target="mulderAddress" />
+				</property>
+				<property name="message">
+					<value class="String" value="I want to believe" />
+				</property>
+				<property name="receiver">
+					<reference target="scullyAddress"/>
+				</property>
+			</agent>
+			<reference target="mulder" />
+		</list>
+		<property name="agents">
+			<reference target="agents" />
+		</property>
+	</agent>
+</configuration>

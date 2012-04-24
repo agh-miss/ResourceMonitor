@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component class="org.jage.examples.properties.xml.SimpleFunctionCounter" version="" xmlns="org.jage"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="org.jage ageDependency.xsd">
+	<declaration>
+		<attribute access="setter" modifier="2" name="xParameter" required="true" setter="setXParameter" getter="getXParameter">
+			<type>
+				<primitive name="int" />
+			</type>
+		</attribute>
+		<attribute access="direct" modifier="2" name="yParameter" required="true" fieldName="y">
+			<type>
+				<primitive name="int" />
+			</type>
+		</attribute>
+	</declaration>
+</component>

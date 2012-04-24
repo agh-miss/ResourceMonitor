@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>applications</artifactId>
+
+	<name>jAgE examples applications</name>
+	<description>Simple applications examples</description>
+	<url>http://age.iisg.agh.edu.pl/jage/applications/examples/</url>
+
+	<parent>
+		<groupId>org.jage.student.examples</groupId>
+		<artifactId>examples</artifactId>
+		<version>2.6.0-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<age.node.conf>classpath:examples/helloworld/age.xml</age.node.conf>
+	</properties>
+
+	<dependencies>
+		<!-- AgE Modules -->
+		<dependency>
+			<groupId>org.jage.platform</groupId>
+			<artifactId>node</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jage.platform</groupId>
+			<artifactId>node-default</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jage.services</groupId>
+			<artifactId>starter-batch-single</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jage.services</groupId>
+			<artifactId>naming</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jage.services</groupId>
+			<artifactId>communication-hazelcast</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- Solution Module -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>solutions</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<!-- logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+
+				<configuration>
+					<mainClass>org.jage.platform.node.NodeBootstrapper</mainClass>
+					<arguments>
+						<argument>-starter</argument>
+						<argument>org.jage.platform.starter.batch.single.BatchModeSingleStarter</argument>
+						<argument>-Dage.node.conf=${age.node.conf}</argument>
+					</arguments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

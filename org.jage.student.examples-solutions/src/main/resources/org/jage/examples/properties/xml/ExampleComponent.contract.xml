@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component class="org.jage.examples.properties.xml.ExampleComponent" version="1.0.0" xmlns="org.jage"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="org.jage ageDependency.xsd">
+	<declaration>
+		<attribute access="setter" name="name" required="true" setter="setName" getter="getName">
+			<type>
+				<simpleClass class="java.lang.String" interface="false" />
+			</type>
+		</attribute>
+		<attribute access="direct" name="version" required="true" fieldName="version">
+			<type>
+				<primitive name="int" />
+			</type>
+		</attribute>
+		<attribute access="direct" name="holder" required="true" fieldName="holder">
+			<type>
+				<simpleClass class="java.lang.Object" interface="false" />
+			</type>
+		</attribute>
+	</declaration>
+</component>

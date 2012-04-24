@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+
+	<component name="communicationManager" class="org.jage.communication.common.manager.PollingCommunicationManager"
+		isSingleton="true" />
+
+	<component name="communicationProtocol" class="org.jage.communication.hazelcast.protocol.PublishSubscribeProtocol"
+		isSingleton="true" />
+
+	<component name="neighbouthoodScanner" class="org.jage.communication.hazelcast.scanner.HazelcastNeighbourhoodScanner"
+		isSingleton="true" />
+
+	<component name="addressCache" class="org.jage.communication.common.cache.AddressSet" isSingleton="true" />
+
+	<component name="addressProvider" class="org.jage.address.node.provider.DefaultNodeAddressProvider"
+		isSingleton="true" />
+
+	<component name="workplaceManager" class="org.jage.pico.PicoWorkplaceManager" isSingleton="true" />
+</configuration>

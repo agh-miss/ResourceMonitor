@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+
+	<agent name="workplace" class="org.jage.workplace.IsolatedSimpleWorkplace">
+		<property name="address">
+			<value class="AgentAddress" value="workplace" />
+		</property>
+
+		<!--  empty query definition -->
+		<component name="queryResult" isSingleton="false"
+			class="org.jage.query.QueryableQueryResult" />
+
+		<component name="emptyQuery" isSingleton="true"
+			class="org.jage.query.RecordingQuery">
+			<property name="resultClass">
+				<value value="queryResult" class="String" />
+			</property>
+		</component>
+
+		<list name="agents">
+
+			<agent name="rootSimpleAggregate" class="org.jage.agent.SimpleAggregate">
+				<property name="address">
+					<value class="AgentAddress" value="TheXFiles" />
+				</property>
+				<list name="simpleAgents">
+					<agent name="squeeze" class="org.jage.agent.SimpleAggregate">
+						<property name="address">
+							<value class="AgentAddress" value="Squeeze" />
+						</property>
+
+						<list name="agents">
+							<agent name="scully"
+								class="org.jage.examples.migration.CrawlingSimpleAgent">
+								<property name="address">
+									<value class="AgentAddress" value="Scully" />
+								</property>
+							</agent>
+							<reference target="scully" />
+
+							<agent name="mulder"
+								class="org.jage.examples.migration.CrawlingSimpleAgent">
+								<property name="address">
+									<value class="AgentAddress" value="Mulder" />
+								</property>
+							</agent>
+							<reference target="mulder" />
+						</list>
+						<property name="agents">
+							<reference target="agents" />
+						</property>
+					</agent>
+					<reference target="squeeze" />
+
+					<agent name="shadows" class="org.jage.agent.SimpleAggregate">
+						<property name="address">
+							<value class="AgentAddress" value="Shadows" />
+						</property>
+
+						<list name="agents">
+							<agent name="skinner"
+								class="org.jage.examples.migration.CrawlingSimpleAgent">
+								<property name="address">
+									<value class="AgentAddress" value="Skinner" />
+								</property>
+							</agent>
+							<reference target="skinner" />
+						</list>
+						<property name="agents">
+							<reference target="agents" />
+						</property>
+					</agent>
+					<reference target="shadows" />
+
+
+					<agent name="space" class="org.jage.agent.SimpleAggregate">
+						<property name="address">
+							<value class="AgentAddress" value="Space" />
+						</property>
+						<list name="agents">
+							<agent name="doggett"
+								class="org.jage.examples.migration.CrawlingSimpleAgent">
+								<property name="address">
+									<value class="AgentAddress" value="Doggett" />
+								</property>
+							</agent>
+							<reference target="doggett" />
+						</list>
+						<property name="agents">
+							<reference target="agents" />
+						</property>
+					</agent>
+					<reference target="space" />
+				</list>
+				<property name="agents">
+					<reference target="simpleAgents" />
+				</property>
+			</agent>
+			<reference target="rootSimpleAggregate" />
+		</list>
+		<property name="agents">
+			<reference target="agents" />
+		</property>
+	</agent>
+</configuration>

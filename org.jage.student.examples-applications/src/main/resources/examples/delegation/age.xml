@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+
+	<component name="workplaceManager" class="org.jage.pico.PicoWorkplaceManager" isSingleton="true">
+		<component name="addressProvider" class="org.jage.address.provider.DefaultAgentAddressProvider" isSingleton="true" />
+
+		<list name="workplaces">
+			<agent name="workplace" class="org.jage.workplace.IsolatedSimpleWorkplace">
+				<property name="nameInitializer">
+					<value value="Workplace" class="String" />
+				</property>
+
+				<list name="agents">
+					<agent name="root" class="org.jage.examples.delegation.DelegationSimpleAggregate">
+						<property name="nameInitializer">
+							<value value="Root" class="String" />
+						</property>
+
+						<property name="echoStrategy">
+							<reference target="parentStrategy" />
+						</property>
+
+						<list name="root-agents">
+							<agent name="level-1" class="org.jage.examples.delegation.DelegationSimpleAggregate">
+								<property name="nameInitializer">
+									<value value="Level-1" class="String" />
+								</property>
+
+								<property name="echoStrategy">
+									<reference target="parentStrategy" />
+								</property>
+								<property name="childStrategy">
+									<value value="parentStrategy" class="String" />
+								</property>
+
+								<list name="level-1-agents">
+									<agent name="level-1-1" class="org.jage.examples.delegation.DelegationSimpleLeaf">
+										<property name="nameInitializer">
+											<value value="Level-1-1" class="String" />
+										</property>
+									</agent>
+
+									<agent name="level-1-2" class="org.jage.examples.delegation.DelegationSimpleLeaf">
+										<property name="nameInitializer">
+											<value value="Level-1-2" class="String" />
+										</property>
+									</agent>
+
+									<reference target="level-1-1" />
+									<reference target="level-1-2" />
+								</list>
+
+								<property name="agents">
+									<reference target="level-1-agents" />
+								</property>
+							</agent>
+
+							<agent name="level-2" class="org.jage.examples.delegation.DelegationSimpleAggregate">
+								<property name="nameInitializer">
+									<value value="Level-2" class="String" />
+								</property>
+
+								<property name="echoStrategy">
+									<reference target="helloStrategy" />
+								</property>
+								<property name="childStrategy">
+									<value value="helloStrategy" class="String" />
+								</property>
+
+								<list name="level-2-agents">
+									<agent name="level-2-1" class="org.jage.examples.delegation.DelegationSimpleLeaf">
+										<property name="nameInitializer">
+											<value value="Level-2-1" class="String" />
+										</property>
+									</agent>
+
+									<reference target="level-2-1" />
+								</list>
+
+								<property name="agents">
+									<reference target="level-2-agents" />
+								</property>
+							</agent>
+
+							<reference target="level-1" />
+							<reference target="level-2" />
+						</list>
+
+						<property name="agents">
+							<reference target="root-agents" />
+						</property>
+					</agent>
+
+					<reference target="root" />
+				</list>
+
+				<property name="agents">
+					<reference target="agents" />
+				</property>
+
+			</agent>
+			<reference target="workplace" />
+		</list>
+
+		<property name="workplaces">
+			<reference target="workplaces" />
+		</property>
+
+		<strategy name="parentStrategy" class="org.jage.examples.delegation.EchoParentStrategy" />
+		<strategy name="helloStrategy" class="org.jage.examples.delegation.EchoHelloStrategy" />
+
+		<component name="stopCondition" class="org.jage.workplace.FixedStepCountStopCondition" isSingleton="true">
+			<constructor-arg>
+				<value class="Long" value="10" />
+			</constructor-arg>
+		</component>
+	</component>
+
+</configuration>

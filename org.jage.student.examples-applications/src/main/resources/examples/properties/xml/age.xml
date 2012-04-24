@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+
+	<component name="workplaceManager" class="org.jage.pico.PicoWorkplaceManager" isSingleton="true">
+		<component name="addressProvider" class="org.jage.address.provider.DefaultAgentAddressProvider" isSingleton="true" />
+		<list name="workplaces">
+			<!-- System which contains 3 PropertiesSimpleAgents which: - uses strategy functionCounter to compute square sum of two 
+				numbers (xParameter & yParameter) - randomly watch neighbors and writes them properties to console SimpleFunctionCounter 
+				contract is read from XML file SimpleFunctionCounter.contract.xml. -->
+
+			<agent name="workplace" class="org.jage.workplace.IsolatedSimpleWorkplace">
+				<property name="nameInitializer">
+					<value value="TheXFiles" class="String" />
+				</property>
+				<strategy name="functionCounter1" class="org.jage.examples.properties.xml.SimpleFunctionCounter">
+					<property name="xParameter">
+						<value class="Integer" value="1" />
+					</property>
+					<property name="yParameter">
+						<value class="Integer" value="2" />
+					</property>
+				</strategy>
+				<strategy name="functionCounter2" class="org.jage.examples.properties.xml.SimpleFunctionCounter">
+					<property name="xParameter">
+						<value class="Integer" value="10" />
+					</property>
+					<property name="yParameter">
+						<value class="Integer" value="20" />
+					</property>
+				</strategy>
+				<strategy name="functionCounter3" class="org.jage.examples.properties.xml.SimpleFunctionCounter">
+					<property name="xParameter">
+						<value class="Integer" value="100" />
+					</property>
+					<property name="yParameter">
+						<value class="Integer" value="200" />
+					</property>
+				</strategy>
+				<list name="agents">
+					<agent name="scully" class="org.jage.examples.properties.xml.PropertiesSimpleAgent">
+						<property name="nameInitializer">
+							<value value="Scully" class="String" />
+						</property>
+						<property name="actor">
+							<value class="String" value="Gillian Anderson" />
+						</property>
+						<property name="functionCounter">
+							<reference target="functionCounter1" />
+						</property>
+					</agent>
+					<reference target="scully" />
+					<agent name="mulder" class="org.jage.examples.properties.xml.PropertiesSimpleAgent">
+						<property name="nameInitializer">
+							<value value="Mulder" class="String" />
+						</property>
+						<property name="actor">
+							<value class="String" value="David Duchovny" />
+						</property>
+						<property name="functionCounter">
+							<reference target="functionCounter2" />
+						</property>
+					</agent>
+					<reference target="mulder" />
+					<agent name="skinner" class="org.jage.examples.properties.xml.PropertiesSimpleAgent">
+						<property name="nameInitializer">
+							<value value="Skinner" class="String" />
+						</property>
+						<property name="actor">
+							<value class="String" value="Mitch Pileggi" />
+						</property>
+						<property name="functionCounter">
+							<reference target="functionCounter3" />
+						</property>
+					</agent>
+					<reference target="skinner" />
+				</list>
+				<property name="agents">
+					<reference target="agents" />
+				</property>
+			</agent>
+			<reference target="workplace" />
+		</list>
+		<property name="workplaces">
+			<reference target="workplaces" />
+		</property>
+
+		<component name="stopCondition" class="org.jage.workplace.FixedStepCountStopCondition" isSingleton="true">
+			<constructor-arg>
+				<value class="Long" value="10" />
+			</constructor-arg>
+		</component>
+	</component>
+
+</configuration>

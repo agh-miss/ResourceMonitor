@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.3 http://age.iisg.agh.edu.pl/xsd/age-2.3.xsd">
+
+	<!-- workplace manager component name should be the same as IWorkplaceManager.ID -->
+	<component name="workplaceManager" class="org.jage.pico.PicoWorkplaceManager" isSingleton="true">
+		<component name="addressProvider" class="org.jage.address.provider.DefaultAgentAddressProvider" isSingleton="true" />
+
+		<include file="classpath:examples/functions/workplace.xml" />
+
+		<list name="workplaces">
+			<reference target="workplace" />
+		</list>
+		<property name="workplaces">
+			<reference target="workplaces" />
+		</property>
+
+		<component name="stopCondition" class="org.jage.workplace.FixedStepCountStopCondition" isSingleton="true">
+			<constructor-arg>
+				<value class="Long" value="5" />
+			</constructor-arg>
+		</component>
+	</component>
+
+</configuration>

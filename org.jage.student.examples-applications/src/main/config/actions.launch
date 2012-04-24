@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.debug.core.appendEnvironmentVariables" value="true"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.jage.platform.node.NodeBootstrapper"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-starter org.jage.platform.starter.batch.single.BatchModeSingleStarter -Dage.node.conf=age.xml"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.jage.student.examples-applications"/>
+<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${project_loc:org.jage.student.examples-applications}/target/classes/examples/actions"/>
+</launchConfiguration>

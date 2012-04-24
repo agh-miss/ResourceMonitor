@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+
+	<!--
+		This example runs Agents which has a property of type ExampleComponent
+		which contract is read from XML file ExampleComponent.contract.xml.
+
+		ExampleComponent prints it's properties using printComponentInfo method.
+	-->
+
+	<agent name="workplace" class="org.jage.workplace.IsolatedSimpleWorkplace">
+		<property name="address">
+			<value class="AgentAddress" value="TheXFiles" />
+		</property>
+
+		<list name="agents">
+			<agent name="exampleComponentForScully" class="org.jage.examples.properties.xml.ExampleComponent">
+				<property name="name">
+					<value value="Scully's component" class="String" />
+				</property>
+				<property name="version">
+					<value value="1" class="Integer" />
+				</property>
+				<component name="sampleObject" class="java.lang.Object"
+					isSingleton="true" />
+				<property name="holder">
+					<reference target="sampleObject" />
+				</property>
+			</agent>
+
+			<agent name="exampleComponentForMulder" class="org.jage.examples.properties.xml.ExampleComponent">
+				<property name="name">
+					<value value="Mulder's component" class="String" />
+				</property>
+				<property name="version">
+					<value value="777" class="Integer" />
+				</property>
+				<component name="sampleObject" class="java.lang.Object"
+					isSingleton="true" />
+				<property name="holder">
+					<reference target="sampleObject" />
+				</property>
+			</agent>
+
+			<agent name="scully"
+				class="org.jage.examples.properties.xml.XMLContractHelloWorldSimpleAgent">
+				<property name="address">
+					<value value="Scully" class="AgentAddress" />
+				</property>
+				<property name="exampleComponent">
+					<reference target="exampleComponentForScully"></reference>
+				</property>
+			</agent>
+			<reference target="scully" />
+
+			<agent name="mulder"
+				class="org.jage.examples.properties.xml.XMLContractHelloWorldSimpleAgent">
+				<property name="address">
+					<value value="Mulder" class="AgentAddress" />
+				</property>
+				<property name="exampleComponent">
+					<reference target="exampleComponentForMulder"></reference>
+				</property>
+			</agent>
+			<reference target="mulder" />
+
+		</list>
+		<property name="agents">
+			<reference target="agents" />
+		</property>
+		<!--  empty query definition -->
+		<component name="queryResult" isSingleton="false"
+			class="org.jage.query.QueryableQueryResult" />
+		<component name="emptyQuery" isSingleton="true"
+			class="org.jage.query.RecordingQuery">
+			<property name="resultClass">
+				<value value="queryResult" class="String" />
+			</property>
+		</component>
+	</agent>
+
+
+</configuration>

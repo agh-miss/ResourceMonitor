@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<configuration xmlns="http://age.iisg.agh.edu.pl/AgE/2.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://age.iisg.agh.edu.pl/AgE/2.5 http://age.iisg.agh.edu.pl/xsd/age-2.5.xsd">
+
+	<component name="workplaceManager" class="org.jage.pico.PicoWorkplaceManager" isSingleton="true">
+		<component name="addressProvider" class="org.jage.address.provider.DefaultAgentAddressProvider" isSingleton="true" />
+		<list name="workplaces">
+			<agent name="workplace" class="org.jage.workplace.IsolatedSimpleWorkplace">
+				<property name="nameInitializer">
+					<value class="String" value="TheXFiles" />
+				</property>
+
+				<list name="agents">
+					<agent name="list" class="org.jage.examples.configuration.ListAgent">
+						<property name="nameInitializer">
+							<value class="String" value="List" />
+						</property>
+
+						<list name="object-example" type="org.jage.examples.configuration.ExampleClass">
+							<component name="example-1" class="org.jage.examples.configuration.ExampleClass" isSingleton="false">
+								<constructor-arg>
+									<value value="First object" class="String" />
+								</constructor-arg>
+							</component>
+
+							<component name="example-2" class="org.jage.examples.configuration.ExampleClass" isSingleton="false">
+								<constructor-arg>
+									<value value="Second object" class="String" />
+								</constructor-arg>
+							</component>
+
+							<component name="example-3" class="org.jage.examples.configuration.ExampleClass" isSingleton="false">
+								<constructor-arg>
+									<value value="Third object" class="String" />
+								</constructor-arg>
+							</component>
+
+							<reference target="example-1" />
+							<reference target="example-2" />
+							<reference target="example-3" />
+						</list>
+
+						<list name="long-example" type="java.lang.Long">
+							<value class="Long" value="2" />
+							<value class="Long" value="4" />
+							<value class="Long" value="8" />
+						</list>
+					</agent>
+					<reference target="list" />
+
+					<agent name="map" class="org.jage.examples.configuration.MapAgent">
+						<property name="nameInitializer">
+							<value class="String" value="Map" />
+						</property>
+
+						<map name="object-example" keyType="java.lang.String" valueType="org.jage.examples.configuration.ExampleClass">
+							<component name="example-1" class="org.jage.examples.configuration.ExampleClass" isSingleton="false">
+								<constructor-arg>
+									<value value="First object" class="String" />
+								</constructor-arg>
+							</component>
+
+							<component name="example-2" class="org.jage.examples.configuration.ExampleClass" isSingleton="false">
+								<constructor-arg>
+									<value value="Second object" class="String" />
+								</constructor-arg>
+							</component>
+
+							<component name="example-3" class="org.jage.examples.configuration.ExampleClass" isSingleton="false">
+								<constructor-arg>
+									<value value="Third object" class="String" />
+								</constructor-arg>
+							</component>
+
+							<item>
+								<itemKey>
+									<value value="example-1" class="String" />
+								</itemKey>
+								<itemValue>
+									<reference target="example-1" />
+								</itemValue>
+							</item>
+							<item>
+								<itemKey>
+									<value value="example-2" class="String" />
+								</itemKey>
+								<itemValue>
+									<reference target="example-2" />
+								</itemValue>
+							</item>
+							<item>
+								<itemKey>
+									<value value="example-3" class="String" />
+								</itemKey>
+								<itemValue>
+									<reference target="example-3" />
+								</itemValue>
+							</item>
+						</map>
+
+						<map name="long-example" keyType="java.lang.String" valueType="java.lang.Long">
+							<item>
+								<itemKey>
+									<value value="long-1" class="String" />
+								</itemKey>
+								<itemValue>
+									<value class="Long" value="2" />
+								</itemValue>
+							</item>
+							<item>
+								<itemKey>
+									<value value="long-2" class="String" />
+								</itemKey>
+								<itemValue>
+									<value class="Long" value="4" />
+								</itemValue>
+							</item>
+							<item>
+								<itemKey>
+									<value value="long-3" class="String" />
+								</itemKey>
+								<itemValue>
+									<value class="Long" value="8" />
+								</itemValue>
+							</item>
+						</map>
+					</agent>
+					<reference target="map" />
+
+				</list>
+				<property name="agents">
+					<reference target="agents" />
+				</property>
+			</agent>
+			<reference target="workplace" />
+		</list>
+		<property name="workplaces">
+			<reference target="workplaces" />
+		</property>
+
+		<component name="stopCondition" class="org.jage.workplace.FixedStepCountStopCondition" isSingleton="true">
+			<constructor-arg>
+				<value class="Long" value="1" />
+			</constructor-arg>
+		</component>
+
+	</component>
+
+</configuration>
