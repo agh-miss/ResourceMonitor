@@ -3,7 +3,7 @@ package org.jage.examples.resource_meter;
 import org.hyperic.sigar.SigarException;
 import org.hyperic.sigar.cmd.SigarCommandBase;
 
-public class CpuInfo extends SigarCommandBase {
+public class MemoryInfo extends SigarCommandBase {
 
 	@Override
 	public void output(String[] arg0) throws SigarException {
@@ -11,7 +11,7 @@ public class CpuInfo extends SigarCommandBase {
 
 	public double getValue() {
 		try {
-			return this.sigar.getCpuPerc().getUser();
+			return this.sigar.getMem().getUsedPercent();
 		} catch (SigarException e) {
 			e.printStackTrace();
 		}
@@ -20,7 +20,7 @@ public class CpuInfo extends SigarCommandBase {
 	}
 
 	public int getPercentageValue() {
-		return (int) (getValue() * 100);
+		return (int) getValue();
 	}
 
 }

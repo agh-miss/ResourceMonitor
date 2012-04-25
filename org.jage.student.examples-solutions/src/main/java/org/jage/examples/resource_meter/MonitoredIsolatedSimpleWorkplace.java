@@ -21,6 +21,7 @@ public class MonitoredIsolatedSimpleWorkplace extends IsolatedSimpleWorkplace {
 	@Override
 	public void step() {
 		resourceMeterStr.getCpuLoad();
+		resourceMeterStr.getMemoryLoad();
 		super.step();
 	}
 	
