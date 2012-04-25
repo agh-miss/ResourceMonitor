@@ -10,7 +10,8 @@
 			isSingleton="true" />
 
 		<list name="workplaces">
-			<agent name="workplace" class="org.jage.examples.resource_meter.MonitoredIsolatedSimpleWorkplace">
+			<agent name="workplace"
+				class="org.jage.examples.resource_meter.MonitoredIsolatedSimpleWorkplace">
 
 				<strategy name="resourceMeterStrategy"
 					class="org.jage.examples.resource_meter.ResourceMeterStrategy" />
@@ -24,24 +25,37 @@
 				</property>
 
 				<list name="agents">
-					<agent name="scully"
-						class="org.jage.examples.helloworld.HelloWorldSimpleAgent">
+					<agent name="worker_one"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
 						<property name="nameInitializer">
 							<value value="Scully" class="String" />
 						</property>
-					</agent>
-
-
-					<reference target="scully" />
-
-					<agent name="mulder"
-						class="org.jage.examples.helloworld.HelloWorldSimpleAgent">
-						<property name="nameInitializer">
-							<value value="Lukasz" class="String" />
+						<property name="workTime">
+							<value value="2000" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="20" class="Integer" />
 						</property>
 					</agent>
 
-					<reference target="mulder" />
+
+					<reference target="worker_one" />
+
+					<agent name="worker_two"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Scully" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="1000" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="20" class="Integer" />
+						</property>
+					</agent>
+
+
+					<reference target="worker_two" />
 
 				</list>
 				<property name="agents">
