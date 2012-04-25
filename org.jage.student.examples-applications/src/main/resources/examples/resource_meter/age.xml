@@ -21,14 +21,14 @@
 				</property>
 
 				<property name="nameInitializer">
-					<value value="TheXFiles" class="String" />
+					<value value="ResourceMeter" class="String" />
 				</property>
 
 				<list name="agents">
 					<agent name="worker_one"
 						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
 						<property name="nameInitializer">
-							<value value="Scully" class="String" />
+							<value value="WorkerOne" class="String" />
 						</property>
 						<property name="workTime">
 							<value value="2000" class="Integer" />
@@ -38,13 +38,12 @@
 						</property>
 					</agent>
 
-
 					<reference target="worker_one" />
 
 					<agent name="worker_two"
 						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
 						<property name="nameInitializer">
-							<value value="Scully" class="String" />
+							<value value="WorkerTwo" class="String" />
 						</property>
 						<property name="workTime">
 							<value value="1000" class="Integer" />
@@ -54,8 +53,22 @@
 						</property>
 					</agent>
 
-
 					<reference target="worker_two" />
+
+					<agent name="worker_lazy"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="WorkerLazy" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="10" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="2000" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_lazy" />
 
 				</list>
 				<property name="agents">
