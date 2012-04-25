@@ -32,6 +32,9 @@
 
 package org.jage.examples.resource_meter;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 
 import org.slf4j.Logger;
@@ -39,6 +42,7 @@ import org.slf4j.LoggerFactory;
 
 import org.jage.agent.SimpleAgent;
 import org.jage.platform.component.annotation.Inject;
+import org.jage.platform.component.builder.CollectionBuilder;
 import org.jage.platform.component.exception.ComponentException;
 import org.jage.property.PropertyGetter;
 import org.jage.property.PropertySetter;
@@ -70,7 +74,8 @@ public class HardlyWorkingAgent extends SimpleAgent implements Runnable {
 
 	@Override
 	public void step() {
-		log.info("Working hard period: {}ms doing nothing period: {}ms", workTime, dallyTime);
+		log.info("{} is working hard period: {}ms doing nothing period: {}ms",
+				new Object[] { nameInitializer, workTime, dallyTime });
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -81,7 +86,7 @@ public class HardlyWorkingAgent extends SimpleAgent implements Runnable {
 	@Override
 	public boolean finish() {
 		setWorking(false);
-		log.info("Finishing Hardly Working Agent: {}", getAddress());		
+		log.info("Finishing Hardly Working Agent: {}", getAddress());
 		return true;
 	}
 
