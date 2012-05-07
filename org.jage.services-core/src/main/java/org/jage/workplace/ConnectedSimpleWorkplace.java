@@ -57,7 +57,7 @@ public class ConnectedSimpleWorkplace extends SimpleWorkplace {
 
 	private static final long serialVersionUID = -3126941681607203590L;
 
-	private final Logger log = LoggerFactory.getLogger(ConnectedSimpleWorkplace.class);
+	protected final Logger log = LoggerFactory.getLogger(ConnectedSimpleWorkplace.class);
 
 	@Override
 	public <E extends IAgent, T> Collection<T> queryParent(AgentEnvironmentQuery<E, T> query) {

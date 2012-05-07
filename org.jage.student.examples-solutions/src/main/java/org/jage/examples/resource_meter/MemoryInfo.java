@@ -19,8 +19,8 @@ public class MemoryInfo extends SigarCommandBase {
 		return -1.0;
 	}
 
-	public int getPercentageValue() {
-		return (int) getValue();
+	public long getPercentageValue() {
+		return (long) getValue();
 	}
 
 }

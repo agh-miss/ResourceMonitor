@@ -6,7 +6,7 @@
 		<component name="addressProvider" class="org.jage.address.provider.DefaultAgentAddressProvider" isSingleton="true" />
 
 		<list name="workplaces">
-			<agent name="workplace" class="org.jage.workplace.IsolatedSimpleWorkplace">
+			<agent name="workplace1" class="org.jage.workplace.IsolatedSimpleWorkplace">
 				<property name="nameInitializer">
 					<value value="TheXFiles" class="String" />
 				</property>
@@ -31,7 +31,35 @@
 					<reference target="agents" />
 				</property>
 			</agent>
-			<reference target="workplace" />
+			<reference target="workplace1" />
+			
+			<agent name="workplace2" class="org.jage.workplace.IsolatedSimpleWorkplace">
+				<property name="nameInitializer">
+					<value value="TheXFiles" class="String" />
+				</property>
+
+				<list name="agents">
+					<agent name="scully" class="org.jage.examples.helloworld.HelloWorldSimpleAgent">
+						<property name="nameInitializer">
+							<value value="Scully" class="String" />
+						</property>
+					</agent>
+					<reference target="scully" />
+
+					<agent name="mulder" class="org.jage.examples.helloworld.HelloWorldSimpleAgent">
+						<property name="nameInitializer">
+							<value value="Mulder" class="String" />
+						</property>
+					</agent>
+					<reference target="mulder" />
+
+				</list>
+				<property name="agents">
+					<reference target="agents" />
+				</property>
+			</agent>
+			<reference target="workplace2" />
+			
 		</list>
 		<property name="workplaces">
 			<reference target="workplaces" />

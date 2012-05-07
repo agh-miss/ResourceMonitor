@@ -19,8 +19,8 @@ public class CpuInfo extends SigarCommandBase {
 		return -1.0;
 	}
 
-	public int getPercentageValue() {
-		return (int) (getValue() * 100);
+	public long getPercentageValue() {
+		return (long) (getValue() * 100);
 	}
 
 }

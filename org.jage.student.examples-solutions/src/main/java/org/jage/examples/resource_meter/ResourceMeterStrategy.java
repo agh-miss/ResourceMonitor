@@ -12,14 +12,14 @@ public class ResourceMeterStrategy extends ClassPropertyContainer implements
 
 	@Override
 	public Long getCpuLoad() {
-		log.info("CPU LOAD: " + cpuInfo.getPercentageValue() + "%");
-		return null;
+		long cpuLoad = cpuInfo.getPercentageValue();
+		return cpuLoad;
 	}
 
 	@Override
 	public Long getMemoryLoad() {
-		log.info("MEMORY LOAD: " + memoryInfo.getPercentageValue() + "%");
-		return null;
+		long memoryLoad = memoryInfo.getPercentageValue();
+		return memoryLoad;
 	}
 
 }

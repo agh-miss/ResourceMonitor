@@ -50,7 +50,7 @@ public class IsolatedSimpleWorkplace extends SimpleWorkplace {
 
 	private static final long serialVersionUID = 257256225676180951L;
 
-	private final Logger log = LoggerFactory.getLogger(IsolatedSimpleWorkplace.class);
+	protected final Logger log = LoggerFactory.getLogger(IsolatedSimpleWorkplace.class);
 
 	/**
 	 * {@inheritDoc}
