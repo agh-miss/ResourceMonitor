@@ -10,7 +10,7 @@
 			isSingleton="true" />
 
 		<list name="workplaces">
-			<agent name="workplace1"
+			<agent name="Tesco"
 				class="org.jage.examples.resource_meter.MonitoredIsolatedSimpleWorkplace">
 
 				<strategy name="resourceMeterStrategy"
@@ -21,14 +21,14 @@
 				</property>
 
 				<property name="nameInitializer">
-					<value value="ResourceMeter1" class="String" />
+					<value value="Tesco" class="String" />
 				</property>
 
 				<list name="agents">
 					<agent name="worker_one"
 						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
 						<property name="nameInitializer">
-							<value value="WorkerOne" class="String" />
+							<value value="Adam" class="String" />
 						</property>
 						<property name="workTime">
 							<value value="2000" class="Integer" />
@@ -43,7 +43,7 @@
 					<agent name="worker_two"
 						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
 						<property name="nameInitializer">
-							<value value="WorkerTwo" class="String" />
+							<value value="Szymon" class="String" />
 						</property>
 						<property name="workTime">
 							<value value="1000" class="Integer" />
@@ -75,9 +75,9 @@
 					<reference target="agents" />
 				</property>
 			</agent>
-			<reference target="workplace1" />
+			<reference target="Tesco" />
 			
-			<agent name="workplace2"
+			<agent name="DexterLaboratory"
 				class="org.jage.examples.resource_meter.MonitoredIsolatedSimpleWorkplace">
 
 				<strategy name="resourceMeterStrategy"
@@ -88,14 +88,14 @@
 				</property>
 
 				<property name="nameInitializer">
-					<value value="ResourceMeter2" class="String" />
+					<value value="DexterLaboratory" class="String" />
 				</property>
 
 				<list name="agents">
 					<agent name="worker_one"
 						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
 						<property name="nameInitializer">
-							<value value="WorkerOne" class="String" />
+							<value value="Lukasz" class="String" />
 						</property>
 						<property name="workTime">
 							<value value="2000" class="Integer" />
@@ -110,7 +110,7 @@
 					<agent name="worker_two"
 						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
 						<property name="nameInitializer">
-							<value value="WorkerTwo" class="String" />
+							<value value="Radek" class="String" />
 						</property>
 						<property name="workTime">
 							<value value="1000" class="Integer" />
@@ -125,7 +125,7 @@
 					<agent name="worker_lazy"
 						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
 						<property name="nameInitializer">
-							<value value="WorkerLazy" class="String" />
+							<value value="Stefan" class="String" />
 						</property>
 						<property name="workTime">
 							<value value="10" class="Integer" />
@@ -142,7 +142,7 @@
 					<reference target="agents" />
 				</property>
 			</agent>
-			<reference target="workplace2" />
+			<reference target="DexterLaboratory" />
 			
 			
 		</list>

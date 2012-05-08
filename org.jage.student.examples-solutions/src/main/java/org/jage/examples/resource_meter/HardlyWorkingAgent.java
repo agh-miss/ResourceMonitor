@@ -74,8 +74,8 @@ public class HardlyWorkingAgent extends SimpleAgent implements Runnable {
 
 	@Override
 	public void step() {
-		log.info("{} is working hard period: {}ms doing nothing period: {}ms",
-				new Object[] { nameInitializer, workTime, dallyTime });
+		log.info("{} is working hard period: {}ms doing nothing period: {}ms in workplace: {}",
+				new Object[] { nameInitializer, workTime, dallyTime, getParentAddress() });
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
