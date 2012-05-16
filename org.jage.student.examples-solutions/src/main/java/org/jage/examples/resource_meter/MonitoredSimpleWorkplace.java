@@ -2,6 +2,7 @@ package org.jage.examples.resource_meter;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.UUID;
 
 import org.jage.address.IAgentAddress;
 import org.jage.address.selector.UnicastSelector;
@@ -20,6 +21,8 @@ import org.jage.query.QueryException;
 import org.jage.workplace.ConnectedSimpleWorkplace;
 
 public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
+
+	private static final UUID id = UUID.randomUUID();
 
 	IResourceMeterStrategy resourceMeterStr;
 
@@ -88,6 +91,7 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 		Integer cpuLoad = resourceMeterStr.getCpuLoad();
 
 		sendObjectToAll(cpuLoad);
+		sendObjectToAll(new MoveAgentTask(id));
 
 		Pair<Object, IAgentAddress> message;
 
@@ -100,11 +104,16 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 			IAgentAddress senderAddress = message.getValue();
 
 			if (object instanceof Integer) {
-				System.out.println("Received cpu load " + (Integer) object);
-			}
-
-			if (object instanceof IAgent) {
+				log.info(getAddress() + " received CPU LOAD "
+						+ (Integer) object + " from " + senderAddress);
+			} else if (object instanceof IAgent) {
 				add((IAgent) object);
+				log.info(getAddress() + " received AGENT "
+						+ ((IAgent) object).getAddress() + " from "
+						+ senderAddress);
+			} else if (object instanceof MoveAgentTask) {
+				log.info(getAddress() + " received MOVE AGENT TASK from "
+						+ senderAddress);
 			}
 
 			if (senderAddress != null) {
@@ -118,13 +127,14 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 					}
 				}
 			}
-
-			log.info("CPU LOAD in workplace " + nameInitializer + ": "
-					+ cpuLoad.toString() + "%");
-			Integer memoryLoad = resourceMeterStr.getMemoryLoad();
-			log.info("MEMORY LOAD in workplace " + nameInitializer + ": "
-					+ memoryLoad.toString() + "%");
 		} while (true);
+
+		log.info("CPU LOAD in workplace " + nameInitializer + ": "
+				+ cpuLoad.toString() + "%");
+		Integer memoryLoad = resourceMeterStr.getMemoryLoad();
+		log.info("MEMORY LOAD in workplace " + nameInitializer + ": "
+				+ memoryLoad.toString() + "%");
+
 		super.step();
 	}
 
