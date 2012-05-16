@@ -27,9 +27,9 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 	public MonitoredSimpleWorkplace() {
 
 	}
-	
+
 	public void sendObjectToAll(Serializable object) {
-		
+
 		try {
 			AgentEnvironmentQuery<AbstractAgent, AbstractAgent> query = new AgentEnvironmentQuery<AbstractAgent, AbstractAgent>();
 			Collection<AbstractAgent> answer = queryEnvironment(query);
@@ -61,60 +61,70 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 		} catch (AgentException e) {
 			log.error("Agent exception", e);
 		}
-		
+
 	}
-	
+
 	public void sendObject(Serializable object, IAgentAddress address) {
-		Header<IAgentAddress> header = new Header<IAgentAddress>(
-				getAddress(), new UnicastSelector<IAgentAddress>(
-						address));
+		Header<IAgentAddress> header = new Header<IAgentAddress>(getAddress(),
+				new UnicastSelector<IAgentAddress>(address));
 		Message<IAgentAddress, Serializable> textMessage = new Message<IAgentAddress, Serializable>(
 				header, object);
-		sendMessage(textMessage);		
+		sendMessage(textMessage);
 	}
-	
-	public Object receiveObject() {
+
+	public Pair<Object, IAgentAddress> receiveObject() {
 		IAgentAddress senderAddress = null;
 		IMessage<IAgentAddress, ?> message = null;
-		do {
-			message = receiveMessage();
-			if (message == null)
-				break;
-			senderAddress = message.getHeader().getSenderAddress();
-			return message.getPayload();
-		} while (true);
-		return null;
+		message = receiveMessage();
+		if (message == null)
+			return null;
+		senderAddress = message.getHeader().getSenderAddress();
+		return new Pair<Object, IAgentAddress>(message.getPayload(),
+				senderAddress);
 	}
 
 	@Override
 	public void step() {
-		Integer cpuLoad = resourceMeterStr.getCpuLoad();		
+		Integer cpuLoad = resourceMeterStr.getCpuLoad();
 
 		sendObjectToAll(cpuLoad);
-		
-		Object object = receiveObject();
-		
-		if(object instanceof Integer) {
-			System.out.println("Received cpu load " + (Integer) object);			
-		}
 
-		/*
-		if (otherWorkplaceLoad != null && senderAddress != null) {
-			IAgent agentToMove = getAgents().get(0);
-			sendObject(agentToMove, senderAddress);
-			try {
-				removeAgent(agentToMove.getAddress());
-			} catch (AgentException e) {
-				log.error("Agent exception", e);
+		Pair<Object, IAgentAddress> message;
+
+		do {
+			message = receiveObject();
+			if (message == null)
+				break;
+
+			Object object = message.getKey();
+			IAgentAddress senderAddress = message.getValue();
+
+			if (object instanceof Integer) {
+				System.out.println("Received cpu load " + (Integer) object);
 			}
 
-		}*/
+			if (object instanceof IAgent) {
+				add((IAgent) object);
+			}
 
-		log.info("CPU LOAD in workplace " + nameInitializer + ": "
-				+ cpuLoad.toString() + "%");
-		Integer memoryLoad = resourceMeterStr.getMemoryLoad();
-		log.info("MEMORY LOAD in workplace " + nameInitializer + ": "
-				+ memoryLoad.toString() + "%");
+			if (senderAddress != null) {
+				if (getAgents().size() > 2) {
+					IAgent agentToMove = getAgents().get(0);
+					sendObject(agentToMove, senderAddress);
+					try {
+						removeAgent(agentToMove.getAddress());
+					} catch (AgentException e) {
+						log.error("Agent exception", e);
+					}
+				}
+			}
+
+			log.info("CPU LOAD in workplace " + nameInitializer + ": "
+					+ cpuLoad.toString() + "%");
+			Integer memoryLoad = resourceMeterStr.getMemoryLoad();
+			log.info("MEMORY LOAD in workplace " + nameInitializer + ": "
+					+ memoryLoad.toString() + "%");
+		} while (true);
 		super.step();
 	}
 
