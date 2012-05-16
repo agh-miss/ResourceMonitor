@@ -29,7 +29,7 @@ public class MonitoredIsolatedSimpleWorkplace extends ConnectedSimpleWorkplace {
 
 	@Override
 	public void step() {
-		Long cpuLoad = resourceMeterStr.getCpuLoad();
+		Integer cpuLoad = resourceMeterStr.getCpuLoad();
 
 		try {
 			AgentEnvironmentQuery<AbstractAgent, AbstractAgent> query = new AgentEnvironmentQuery<AbstractAgent, AbstractAgent>();
@@ -53,7 +53,7 @@ public class MonitoredIsolatedSimpleWorkplace extends ConnectedSimpleWorkplace {
 					Header<IAgentAddress> header = new Header<IAgentAddress>(
 							getAddress(), new UnicastSelector<IAgentAddress>(
 									agentAddress));
-					Message<IAgentAddress, Long> textMessage = new Message<IAgentAddress, Long>(
+					Message<IAgentAddress, Integer> textMessage = new Message<IAgentAddress, Integer>(
 							header, cpuLoad);
 					sendMessage(textMessage);
 				}
@@ -70,7 +70,7 @@ public class MonitoredIsolatedSimpleWorkplace extends ConnectedSimpleWorkplace {
 			message = receiveMessage();
 			if (message == null)
 				break;
-			if (message.getPayload() instanceof Long) {
+			if (message.getPayload() instanceof Integer) {
 				if (message != null) {
 					senderAddress = message.getHeader().getSenderAddress();
 					log.info("Agent: {} received message from: {}:",
@@ -114,7 +114,7 @@ public class MonitoredIsolatedSimpleWorkplace extends ConnectedSimpleWorkplace {
 
 		log.info("CPU LOAD in workplace " + nameInitializer + ": "
 				+ cpuLoad.toString() + "%");
-		Long memoryLoad = resourceMeterStr.getMemoryLoad();
+		Integer memoryLoad = resourceMeterStr.getMemoryLoad();
 		log.info("MEMORY LOAD in workplace " + nameInitializer + ": "
 				+ memoryLoad.toString() + "%");
 		super.step();

@@ -4,8 +4,8 @@ import org.jage.strategy.IStrategy;
 
 public interface IResourceMeterStrategy extends IStrategy {
 
-	Long getCpuLoad();
+	Integer getCpuLoad();
 
-	Long getMemoryLoad();
+	Integer getMemoryLoad();
 
 }
