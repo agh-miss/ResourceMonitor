@@ -9,18 +9,18 @@ public class MemoryInfo extends SigarCommandBase {
 	public void output(String[] arg0) throws SigarException {
 	}
 
-	public double getValue() {
+	private double getValue() {
 		try {
 			return this.sigar.getMem().getUsedPercent();
 		} catch (SigarException e) {
 			e.printStackTrace();
 		}
-
 		return -1.0;
 	}
 
-	public long getPercentageValue() {
-		return (long) getValue();
+	public Integer getPercentageValue() {
+		double value = getValue();
+		return value != -1.0 ? Integer.valueOf((int) (value * 100)) : null;
 	}
 
 }
