@@ -88,14 +88,14 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 
 	@Override
 	public void step() {
-		Long cpuLoad = resourceMeterStr.getCpuLoad();		
+		Integer cpuLoad = resourceMeterStr.getCpuLoad();		
 
 		sendObjectToAll(cpuLoad);
 		
 		Object object = receiveObject();
 		
-		if(object instanceof Long) {
-			System.out.println("Received cpu load " + (Long) object);			
+		if(object instanceof Integer) {
+			System.out.println("Received cpu load " + (Integer) object);			
 		}
 
 		/*
@@ -112,7 +112,7 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 
 		log.info("CPU LOAD in workplace " + nameInitializer + ": "
 				+ cpuLoad.toString() + "%");
-		Long memoryLoad = resourceMeterStr.getMemoryLoad();
+		Integer memoryLoad = resourceMeterStr.getMemoryLoad();
 		log.info("MEMORY LOAD in workplace " + nameInitializer + ": "
 				+ memoryLoad.toString() + "%");
 		super.step();
