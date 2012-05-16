@@ -1,5 +1,6 @@
 package org.jage.examples.resource_meter;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import org.jage.address.IAgentAddress;
@@ -18,19 +19,17 @@ import org.jage.query.AgentEnvironmentQuery;
 import org.jage.query.QueryException;
 import org.jage.workplace.ConnectedSimpleWorkplace;
 
-public class MonitoredIsolatedSimpleWorkplace extends ConnectedSimpleWorkplace {
+public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 
 	IResourceMeterStrategy resourceMeterStr;
 
 	@Inject
-	public MonitoredIsolatedSimpleWorkplace() {
+	public MonitoredSimpleWorkplace() {
 
 	}
-
-	@Override
-	public void step() {
-		Long cpuLoad = resourceMeterStr.getCpuLoad();
-
+	
+	public void sendObjectToAll(Serializable object) {
+		
 		try {
 			AgentEnvironmentQuery<AbstractAgent, AbstractAgent> query = new AgentEnvironmentQuery<AbstractAgent, AbstractAgent>();
 			Collection<AbstractAgent> answer = queryEnvironment(query);
@@ -53,8 +52,8 @@ public class MonitoredIsolatedSimpleWorkplace extends ConnectedSimpleWorkplace {
 					Header<IAgentAddress> header = new Header<IAgentAddress>(
 							getAddress(), new UnicastSelector<IAgentAddress>(
 									agentAddress));
-					Message<IAgentAddress, Long> textMessage = new Message<IAgentAddress, Long>(
-							header, cpuLoad);
+					Message<IAgentAddress, Serializable> textMessage = new Message<IAgentAddress, Serializable>(
+							header, object);
 					sendMessage(textMessage);
 				}
 
@@ -62,55 +61,54 @@ public class MonitoredIsolatedSimpleWorkplace extends ConnectedSimpleWorkplace {
 		} catch (AgentException e) {
 			log.error("Agent exception", e);
 		}
-
-		Long otherWorkplaceLoad = null;
+		
+	}
+	
+	public void sendObject(Serializable object, IAgentAddress address) {
+		Header<IAgentAddress> header = new Header<IAgentAddress>(
+				getAddress(), new UnicastSelector<IAgentAddress>(
+						address));
+		Message<IAgentAddress, Serializable> textMessage = new Message<IAgentAddress, Serializable>(
+				header, object);
+		sendMessage(textMessage);		
+	}
+	
+	public Object receiveObject() {
 		IAgentAddress senderAddress = null;
 		IMessage<IAgentAddress, ?> message = null;
 		do {
 			message = receiveMessage();
 			if (message == null)
 				break;
-			if (message.getPayload() instanceof Long) {
-				if (message != null) {
-					senderAddress = message.getHeader().getSenderAddress();
-					log.info("Agent: {} received message from: {}:",
-							getAddress(), senderAddress);
-					otherWorkplaceLoad = (Long) message.getPayload();
-					log.info("    {}", message.getPayload());
-
-				}
-			} else if (message.getPayload() instanceof IAgent) {
-				if (message != null) {
-					log.info("Agent: {} received message from: {}:",
-							getAddress(), message.getHeader()
-									.getSenderAddress());
-					log.info("    {}", message.getPayload());
-					add((IAgent) message.getPayload());
-
-				}
-			}
-
+			senderAddress = message.getHeader().getSenderAddress();
+			return message.getPayload();
 		} while (true);
+		return null;
+	}
 
+	@Override
+	public void step() {
+		Long cpuLoad = resourceMeterStr.getCpuLoad();		
+
+		sendObjectToAll(cpuLoad);
+		
+		Object object = receiveObject();
+		
+		if(object instanceof Long) {
+			System.out.println("Received cpu load " + (Long) object);			
+		}
+
+		/*
 		if (otherWorkplaceLoad != null && senderAddress != null) {
-
 			IAgent agentToMove = getAgents().get(0);
-			System.out.println(agentToMove.toString());
-
-			Header<IAgentAddress> header = new Header<IAgentAddress>(
-					getAddress(), new UnicastSelector<IAgentAddress>(
-							senderAddress));
-			Message<IAgentAddress, IAgent> textMessage = new Message<IAgentAddress, IAgent>(
-					header, agentToMove);
-			sendMessage(textMessage);
-
+			sendObject(agentToMove, senderAddress);
 			try {
 				removeAgent(agentToMove.getAddress());
 			} catch (AgentException e) {
 				log.error("Agent exception", e);
 			}
 
-		}
+		}*/
 
 		log.info("CPU LOAD in workplace " + nameInitializer + ": "
 				+ cpuLoad.toString() + "%");

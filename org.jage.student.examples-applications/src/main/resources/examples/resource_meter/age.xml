@@ -11,7 +11,7 @@
 
 		<list name="workplaces">
 			<agent name="Tesco"
-				class="org.jage.examples.resource_meter.MonitoredIsolatedSimpleWorkplace">
+				class="org.jage.examples.resource_meter.MonitoredSimpleWorkplace">
 
 				<strategy name="resourceMeterStrategy"
 					class="org.jage.examples.resource_meter.ResourceMeterStrategy" />
@@ -78,7 +78,7 @@
 			<reference target="Tesco" />
 			
 			<agent name="DexterLaboratory"
-				class="org.jage.examples.resource_meter.MonitoredIsolatedSimpleWorkplace">
+				class="org.jage.examples.resource_meter.MonitoredSimpleWorkplace">
 
 				<strategy name="resourceMeterStrategy"
 					class="org.jage.examples.resource_meter.ResourceMeterStrategy" />
