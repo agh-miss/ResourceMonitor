@@ -20,7 +20,7 @@ public class MemoryInfo extends SigarCommandBase {
 
 	public Integer getPercentageValue() {
 		double value = getValue();
-		return value != -1.0 ? Integer.valueOf((int) (value * 100)) : null;
+		return value != -1.0 ? Integer.valueOf((int)value) : null;
 	}
 
 }
