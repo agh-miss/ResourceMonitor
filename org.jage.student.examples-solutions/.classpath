@@ -62,6 +62,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-all/1.1/hamcrest-all-1.1.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-all/1.1/hamcrest-all-1.1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lukego/Desktop/AGH/MISS/hyperic-sigar-1.6.4/sigar-bin/lib/sigar.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Radzio/Desktop/hyperic-sigar-1.6.4/hyperic-sigar-1.6.4/sigar-bin/lib/sigar.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
