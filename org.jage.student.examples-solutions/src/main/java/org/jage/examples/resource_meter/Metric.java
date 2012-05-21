@@ -7,7 +7,7 @@ public class Metric implements Serializable {
 	Integer cpuLoad;
 	Integer memoryLoad;
 	
-	public Metric(Integer cpuLoad, Integer memoryLong) {
+	public Metric(Integer cpuLoad, Integer memoryLoad) {
 		this.cpuLoad = cpuLoad;
 		this.memoryLoad = memoryLoad;
 	}

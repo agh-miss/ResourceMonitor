@@ -2,6 +2,9 @@ package org.jage.examples.resource_meter;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
 import org.jage.address.IAgentAddress;
@@ -23,6 +26,8 @@ import org.jage.workplace.ConnectedSimpleWorkplace;
 public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 
 	private static final UUID id = UUID.randomUUID();
+	private Map<IAgentAddress, Metric> metrics = new HashMap<IAgentAddress, Metric>();
+	private Integer randomLoad = new Random().nextInt(100);
 
 	IResourceMeterStrategy resourceMeterStr;
 
@@ -51,7 +56,7 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 					log.error("Sending load fail", e);
 				}
 
-				if (agentAddress != null && !agentAddress.equals(getAddress())) {
+				if (agentAddress != null) {
 					Header<IAgentAddress> header = new Header<IAgentAddress>(
 							getAddress(), new UnicastSelector<IAgentAddress>(
 									agentAddress));
@@ -89,11 +94,35 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 	@Override
 	public void step() {
 		Integer cpuLoad = resourceMeterStr.getCpuLoad();
+		Integer memoryLoad = resourceMeterStr.getMemoryLoad();
 
-		sendObjectToAll(cpuLoad);
-		sendObjectToAll(new MoveAgentTask(id));
+		sendObjectToAll(new Metric(cpuLoad + randomLoad, memoryLoad));
 
 		Pair<Object, IAgentAddress> message;
+
+		IAgentAddress minLoadAgent = null;
+		IAgentAddress maxLoadAgent = null;
+		Integer minLoad = Integer.MAX_VALUE;
+		Integer maxLoad = Integer.MIN_VALUE;
+		System.out.println(metrics.size());
+		for (Map.Entry<IAgentAddress, Metric> entry : metrics.entrySet()) {
+			Integer value = entry.getValue().getValue();
+			if (value > maxLoad) {
+				maxLoad = value;
+				maxLoadAgent = entry.getKey();
+			}
+			if (value < minLoad) {
+				minLoad = value;
+				minLoadAgent = entry.getKey();
+			}
+		}
+		if (minLoadAgent != null && maxLoadAgent != null
+				&& minLoadAgent != maxLoadAgent) {
+			MoveAgentTask moveAgentTask = new MoveAgentTask(id);
+			moveAgentTask.setSourceWorkplace(maxLoadAgent);
+			moveAgentTask.setDestinationWorkplace(minLoadAgent);
+			sendObject(moveAgentTask, maxLoadAgent);
+		}
 
 		do {
 			message = receiveObject();
@@ -112,26 +141,39 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 						+ ((IAgent) object).getAddress() + " from "
 						+ senderAddress);
 			} else if (object instanceof MoveAgentTask) {
-				log.info(getAddress() + " received MOVE AGENT TASK from "
-						+ senderAddress);
-			}
 
-			if (senderAddress != null) {
-				if (getAgents().size() > 2) {
+				MoveAgentTask receivedMoveAgentTask = (MoveAgentTask) object;
+				if (getAgents().size() > 1) {
 					IAgent agentToMove = getAgents().get(0);
-					sendObject(agentToMove, senderAddress);
+					sendObject(agentToMove,
+							receivedMoveAgentTask.getDestinationWorkplace());
 					try {
 						removeAgent(agentToMove.getAddress());
 					} catch (AgentException e) {
-						log.error("Agent exception", e);
+						e.printStackTrace();
 					}
 				}
+
+				log.info(getAddress() + " received MOVE AGENT TASK from "
+						+ senderAddress);
+
+			} else if (object instanceof Metric) {
+				metrics.put(senderAddress, (Metric) object);
+				log.info(getAddress() + " received METRIC from "
+						+ senderAddress + " VALUE "
+						+ ((Metric) object).getValue());
 			}
+
+			/*
+			 * if (senderAddress != null) { if (getAgents().size() > 2) { IAgent
+			 * agentToMove = getAgents().get(0); sendObject(agentToMove,
+			 * senderAddress); try { removeAgent(agentToMove.getAddress()); }
+			 * catch (AgentException e) { log.error("Agent exception", e); } } }
+			 */
 		} while (true);
 
 		log.info("CPU LOAD in workplace " + nameInitializer + ": "
 				+ cpuLoad.toString() + "%");
-		Integer memoryLoad = resourceMeterStr.getMemoryLoad();
 		log.info("MEMORY LOAD in workplace " + nameInitializer + ": "
 				+ memoryLoad.toString() + "%");
 
