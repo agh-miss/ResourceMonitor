@@ -76,7 +76,7 @@
 				</property>
 			</agent>
 			<reference target="Tesco" />
-			
+
 			<agent name="Real"
 				class="org.jage.examples.resource_meter.MonitoredSimpleWorkplace">
 
@@ -143,8 +143,410 @@
 				</property>
 			</agent>
 			<reference target="Real" />
-			
-			
+
+			<agent name="Zabka"
+				class="org.jage.examples.resource_meter.MonitoredSimpleWorkplace">
+
+				<strategy name="resourceMeterStrategy"
+					class="org.jage.examples.resource_meter.ResourceMeterStrategy" />
+
+				<property name="resourceMonitorStr">
+					<reference target="resourceMeterStrategy" />
+				</property>
+
+				<property name="nameInitializer">
+					<value value="Zabka" class="String" />
+				</property>
+
+				<list name="agents">
+					<agent name="worker_one"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Lukasz" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="2000" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="20" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_one" />
+
+					<agent name="worker_two"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Radek" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="1000" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="20" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_two" />
+
+					<agent name="worker_lazy"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Stefan" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="10" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="2000" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_lazy" />
+
+				</list>
+				<property name="agents">
+					<reference target="agents" />
+				</property>
+			</agent>
+			<reference target="Zabka" />
+
+			<agent name="Polo"
+				class="org.jage.examples.resource_meter.MonitoredSimpleWorkplace">
+
+				<strategy name="resourceMeterStrategy"
+					class="org.jage.examples.resource_meter.ResourceMeterStrategy" />
+
+				<property name="resourceMonitorStr">
+					<reference target="resourceMeterStrategy" />
+				</property>
+
+				<property name="nameInitializer">
+					<value value="Polo" class="String" />
+				</property>
+
+				<list name="agents">
+					<agent name="worker_one"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Lukasz" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="2000" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="20" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_one" />
+
+					<agent name="worker_two"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Radek" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="1000" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="20" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_two" />
+
+					<agent name="worker_lazy"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Stefan" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="10" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="2000" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_lazy" />
+
+				</list>
+				<property name="agents">
+					<reference target="agents" />
+				</property>
+			</agent>
+			<reference target="Polo" />
+
+			<agent name="Mini"
+				class="org.jage.examples.resource_meter.MonitoredSimpleWorkplace">
+
+				<strategy name="resourceMeterStrategy"
+					class="org.jage.examples.resource_meter.ResourceMeterStrategy" />
+
+				<property name="resourceMonitorStr">
+					<reference target="resourceMeterStrategy" />
+				</property>
+
+				<property name="nameInitializer">
+					<value value="Mini" class="String" />
+				</property>
+
+				<list name="agents">
+					<agent name="worker_one"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Lukasz" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="2000" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="20" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_one" />
+
+					<agent name="worker_two"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Radek" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="1000" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="20" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_two" />
+
+					<agent name="worker_lazy"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Stefan" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="10" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="2000" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_lazy" />
+
+				</list>
+				<property name="agents">
+					<reference target="agents" />
+				</property>
+			</agent>
+			<reference target="Mini" />
+
+			<agent name="Obi"
+				class="org.jage.examples.resource_meter.MonitoredSimpleWorkplace">
+
+				<strategy name="resourceMeterStrategy"
+					class="org.jage.examples.resource_meter.ResourceMeterStrategy" />
+
+				<property name="resourceMonitorStr">
+					<reference target="resourceMeterStrategy" />
+				</property>
+
+				<property name="nameInitializer">
+					<value value="Obi" class="String" />
+				</property>
+
+				<list name="agents">
+					<agent name="worker_one"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Lukasz" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="2000" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="20" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_one" />
+
+					<agent name="worker_two"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Radek" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="1000" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="20" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_two" />
+
+					<agent name="worker_lazy"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Stefan" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="10" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="2000" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_lazy" />
+
+				</list>
+				<property name="agents">
+					<reference target="agents" />
+				</property>
+			</agent>
+			<reference target="Obi" />
+
+			<agent name="Geant"
+				class="org.jage.examples.resource_meter.MonitoredSimpleWorkplace">
+
+				<strategy name="resourceMeterStrategy"
+					class="org.jage.examples.resource_meter.ResourceMeterStrategy" />
+
+				<property name="resourceMonitorStr">
+					<reference target="resourceMeterStrategy" />
+				</property>
+
+				<property name="nameInitializer">
+					<value value="Geant" class="String" />
+				</property>
+
+				<list name="agents">
+					<agent name="worker_one"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Lukasz" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="2000" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="20" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_one" />
+
+					<agent name="worker_two"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Radek" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="1000" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="20" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_two" />
+
+					<agent name="worker_lazy"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Stefan" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="10" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="2000" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_lazy" />
+
+				</list>
+				<property name="agents">
+					<reference target="agents" />
+				</property>
+			</agent>
+			<reference target="Geant" />
+
+
+			<agent name="Maxi"
+				class="org.jage.examples.resource_meter.MonitoredSimpleWorkplace">
+
+				<strategy name="resourceMeterStrategy"
+					class="org.jage.examples.resource_meter.ResourceMeterStrategy" />
+
+				<property name="resourceMonitorStr">
+					<reference target="resourceMeterStrategy" />
+				</property>
+
+				<property name="nameInitializer">
+					<value value="Maxi" class="String" />
+				</property>
+
+				<list name="agents">
+					<agent name="worker_one"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Lukasz" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="2000" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="20" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_one" />
+
+					<agent name="worker_two"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Radek" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="1000" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="20" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_two" />
+
+					<agent name="worker_lazy"
+						class="org.jage.examples.resource_meter.HardlyWorkingAgent">
+						<property name="nameInitializer">
+							<value value="Stefan" class="String" />
+						</property>
+						<property name="workTime">
+							<value value="10" class="Integer" />
+						</property>
+						<property name="dallyTime">
+							<value value="2000" class="Integer" />
+						</property>
+					</agent>
+
+					<reference target="worker_lazy" />
+
+				</list>
+				<property name="agents">
+					<reference target="agents" />
+				</property>
+			</agent>
+			<reference target="Maxi" />
+
 		</list>
 		<property name="workplaces">
 			<reference target="workplaces" />

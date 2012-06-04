@@ -48,7 +48,7 @@ public class GephiConnector {
 	public static synchronized void addEdge(String sourceId, String targetId) {
 
 		try {
-			if (edgeCounter == 2) {
+			if (edgeCounter == 50) {
 				intro();
 				gephi.write("<nodes count=\"" + nodeCounter + "\">");
 				gephi.write(nodes.toString());
@@ -57,8 +57,7 @@ public class GephiConnector {
 				gephi.write(edges.toString());
 				gephi.write("</edges>");
 				outro();
-				gephi.close();
-				return;
+				gephi.close();				
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
