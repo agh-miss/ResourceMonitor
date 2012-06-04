@@ -16,23 +16,32 @@ public class MetricInterpreter {
 	private Map<IAgentAddress, Integer> agentsToSend = new HashMap<IAgentAddress, Integer>();
 	private Map<IAgentAddress, Integer> agentsToReceive = new HashMap<IAgentAddress, Integer>();
 
-	public MetricInterpreter(UUID uuid, IAgentAddress sourceAddress,
+	public MetricInterpreter(UUID uuid, IAgentAddress currentAgentAddress,
 			Map<IAgentAddress, Metric> metrics) {
 		this.uuid = uuid;
-		this.sourceAddress = sourceAddress;
+		this.sourceAddress = currentAgentAddress;
 		this.metrics = metrics;
 	}
 
-	public void process() {
+	public MetricInterpreter process() {
+		/**
+		 * Check root
+		 */
+		UUID minUuid = uuid;
 		for (IAgentAddress agentAddress : metrics.keySet()) {
 			Metric metric = metrics.get(agentAddress);
-			
+			if (metric.getUuid().compareTo(minUuid) > 0) {
+				minUuid = metric.getUuid();
+			}
 		}
+		if (minUuid == uuid) {
+
+		}
+		return this;
 	}
 
 	public ArrayList<MoveAgentTask> getTasks() {
 		return null;
-
 	}
 
 }

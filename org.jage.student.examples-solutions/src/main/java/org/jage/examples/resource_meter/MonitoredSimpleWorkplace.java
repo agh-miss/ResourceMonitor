@@ -3,6 +3,7 @@ package org.jage.examples.resource_meter;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
@@ -25,7 +26,8 @@ import org.jage.workplace.ConnectedSimpleWorkplace;
 
 public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 
-	private static final UUID id = UUID.randomUUID();
+	private static final long serialVersionUID = 1L;
+	private static final UUID uuid = UUID.randomUUID();
 	private Map<IAgentAddress, Metric> metrics = new HashMap<IAgentAddress, Metric>();
 	private Integer randomLoad = new Random().nextInt(100);
 
@@ -96,7 +98,8 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 		Integer cpuLoad = resourceMeterStr.getCpuLoad();
 		Integer memoryLoad = resourceMeterStr.getMemoryLoad();
 
-		sendObjectToAll(new Metric(cpuLoad + randomLoad, memoryLoad, getAgents().size()));
+		sendObjectToAll(new Metric(cpuLoad + randomLoad, memoryLoad,
+				getAgents().size(), uuid));
 
 		Pair<Object, IAgentAddress> message;
 
@@ -118,7 +121,7 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 		}
 		if (minLoadAgent != null && maxLoadAgent != null
 				&& minLoadAgent != maxLoadAgent) {
-			MoveAgentTask moveAgentTask = new MoveAgentTask(id);
+			MoveAgentTask moveAgentTask = new MoveAgentTask(uuid);
 			moveAgentTask.setSourceWorkplace(maxLoadAgent);
 			moveAgentTask.setDestinationWorkplace(minLoadAgent);
 			sendObject(moveAgentTask, maxLoadAgent);
@@ -165,6 +168,12 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 			}
 
 		} while (true);
+
+		List<MoveAgentTask> moveAgentTasks = new MetricInterpreter(uuid,
+				getAddress(), metrics).process().getTasks();
+		if (moveAgentTasks != null) {
+			// TODO
+		}
 
 		log.info("CPU LOAD in workplace " + nameInitializer + ": "
 				+ cpuLoad.toString() + "%");
