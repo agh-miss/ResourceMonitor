@@ -96,7 +96,7 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 		Integer cpuLoad = resourceMeterStr.getCpuLoad();
 		Integer memoryLoad = resourceMeterStr.getMemoryLoad();
 
-		sendObjectToAll(new Metric(cpuLoad + randomLoad, memoryLoad));
+		sendObjectToAll(new Metric(cpuLoad + randomLoad, memoryLoad, getAgents().size()));
 
 		Pair<Object, IAgentAddress> message;
 
@@ -106,7 +106,7 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 		Integer maxLoad = Integer.MIN_VALUE;
 		System.out.println(metrics.size());
 		for (Map.Entry<IAgentAddress, Metric> entry : metrics.entrySet()) {
-			Integer value = entry.getValue().getValue();
+			Integer value = entry.getValue().getCpuLoad();
 			if (value > maxLoad) {
 				maxLoad = value;
 				maxLoadAgent = entry.getKey();
@@ -161,15 +161,9 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 				metrics.put(senderAddress, (Metric) object);
 				log.info(getAddress() + " received METRIC from "
 						+ senderAddress + " VALUE "
-						+ ((Metric) object).getValue());
+						+ ((Metric) object).getCpuLoad());
 			}
 
-			/*
-			 * if (senderAddress != null) { if (getAgents().size() > 2) { IAgent
-			 * agentToMove = getAgents().get(0); sendObject(agentToMove,
-			 * senderAddress); try { removeAgent(agentToMove.getAddress()); }
-			 * catch (AgentException e) { log.error("Agent exception", e); } } }
-			 */
 		} while (true);
 
 		log.info("CPU LOAD in workplace " + nameInitializer + ": "
