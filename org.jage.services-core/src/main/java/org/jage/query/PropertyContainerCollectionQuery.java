@@ -37,6 +37,7 @@ import java.util.Collection;
 
 import org.jage.property.IPropertyContainer;
 import org.jage.property.InvalidPropertyPathException;
+import org.jage.property.Property;
 
 /**
  * Query implementation that can be used with subclasses of the {@link Collection} class.

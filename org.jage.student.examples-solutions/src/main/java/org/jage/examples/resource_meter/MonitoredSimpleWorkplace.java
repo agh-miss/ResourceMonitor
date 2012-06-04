@@ -48,13 +48,8 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 
 				IAgentAddress agentAddress = null;
 				try {
-					agentAddress = (IAgentAddress) entry.getProperty("address")
-							.getValue();
-				} catch (StringIndexOutOfBoundsException e) {
-					log.error("Sending load fail", e);
-				} catch (QueryException e) {
-					log.error("Sending load fail", e);
-				} catch (InvalidPropertyPathException e) {
+					agentAddress = (IAgentAddress) entry.getAddress();
+				} catch (Exception e) {
 					log.error("Sending load fail", e);
 				}
 
@@ -98,34 +93,10 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 		Integer cpuLoad = resourceMeterStr.getCpuLoad();
 		Integer memoryLoad = resourceMeterStr.getMemoryLoad();
 
-		sendObjectToAll(new Metric(cpuLoad + randomLoad, memoryLoad,
-				getAgents().size(), uuid));
+		sendObjectToAll(new Metric(randomLoad, memoryLoad, getAgents().size(),
+				uuid));
 
 		Pair<Object, IAgentAddress> message;
-
-		IAgentAddress minLoadAgent = null;
-		IAgentAddress maxLoadAgent = null;
-		Integer minLoad = Integer.MAX_VALUE;
-		Integer maxLoad = Integer.MIN_VALUE;
-		System.out.println(metrics.size());
-		for (Map.Entry<IAgentAddress, Metric> entry : metrics.entrySet()) {
-			Integer value = entry.getValue().getCpuLoad();
-			if (value > maxLoad) {
-				maxLoad = value;
-				maxLoadAgent = entry.getKey();
-			}
-			if (value < minLoad) {
-				minLoad = value;
-				minLoadAgent = entry.getKey();
-			}
-		}
-		if (minLoadAgent != null && maxLoadAgent != null
-				&& minLoadAgent != maxLoadAgent) {
-			MoveAgentTask moveAgentTask = new MoveAgentTask(uuid);
-			moveAgentTask.setSourceWorkplace(maxLoadAgent);
-			moveAgentTask.setDestinationWorkplace(minLoadAgent);
-			sendObject(moveAgentTask, maxLoadAgent);
-		}
 
 		do {
 			message = receiveObject();
@@ -172,14 +143,17 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 		List<MoveAgentTask> moveAgentTasks = new MetricInterpreter(uuid,
 				getAddress(), metrics).process().getTasks();
 		if (moveAgentTasks != null) {
-			// TODO
+			for (MoveAgentTask moveAgentTask : moveAgentTasks) {
+				sendObject(moveAgentTask, moveAgentTask.getSourceWorkplace());
+				System.out.println("SENDING TASK");
+			}
 		}
 
 		log.info("CPU LOAD in workplace " + nameInitializer + ": "
 				+ cpuLoad.toString() + "%");
 		log.info("MEMORY LOAD in workplace " + nameInitializer + ": "
 				+ memoryLoad.toString() + "%");
-
+		
 		super.step();
 	}
 

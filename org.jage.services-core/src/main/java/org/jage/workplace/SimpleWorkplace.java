@@ -188,7 +188,7 @@ public class SimpleWorkplace extends SimpleAggregate implements IWorkplace {
 
 		step++;
 
-		notifyMonitorsForChangedProperties();
+		//notifyMonitorsForChangedProperties();
 
 	}
 

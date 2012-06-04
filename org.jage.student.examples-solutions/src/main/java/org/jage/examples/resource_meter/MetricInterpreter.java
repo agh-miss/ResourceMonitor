@@ -1,7 +1,7 @@
 package org.jage.examples.resource_meter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -13,8 +13,8 @@ public class MetricInterpreter {
 	private IAgentAddress sourceAddress;
 	private Map<IAgentAddress, Metric> metrics;
 
-	private Map<IAgentAddress, Integer> agentsToSend = new HashMap<IAgentAddress, Integer>();
-	private Map<IAgentAddress, Integer> agentsToReceive = new HashMap<IAgentAddress, Integer>();
+	private List<IAgentAddress> sender = new ArrayList<IAgentAddress>();
+	private List<IAgentAddress> receiver = new ArrayList<IAgentAddress>();
 
 	public MetricInterpreter(UUID uuid, IAgentAddress currentAgentAddress,
 			Map<IAgentAddress, Metric> metrics) {
@@ -34,14 +34,32 @@ public class MetricInterpreter {
 				minUuid = metric.getUuid();
 			}
 		}
-		if (minUuid == uuid) {
-
+		boolean isRoot = minUuid.equals(uuid);
+		if (isRoot) {
+			for (IAgentAddress agentAddress : metrics.keySet()) {
+				Metric metric = metrics.get(agentAddress);
+				if (metric.getWorkplaceLoad() == WorkplaceLoad.FULL) {
+					sender.add(agentAddress);
+					sender.add(agentAddress);
+				} else if (metric.getWorkplaceLoad() == WorkplaceLoad.HEAVY) {
+					sender.add(agentAddress);
+				} else if (metric.getWorkplaceLoad() == WorkplaceLoad.LOW) {
+					receiver.add(agentAddress);
+				} else if (metric.getWorkplaceLoad() == WorkplaceLoad.FREE) {
+					receiver.add(agentAddress);
+					receiver.add(agentAddress);
+				}
+			}
 		}
 		return this;
 	}
 
 	public ArrayList<MoveAgentTask> getTasks() {
-		return null;
+		ArrayList<MoveAgentTask> tasks = new ArrayList<MoveAgentTask>();
+		for (int i = 0; i < Math.min(sender.size(), receiver.size()); i++) {			
+			tasks.add(new MoveAgentTask(uuid, sender.get(i), receiver.get(i)));
+			System.out.println("NEW TASK");
+		}
+		return tasks;
 	}
-
 }

@@ -61,6 +61,9 @@ public class Metric implements Serializable {
 		} else if (value >= LEVEL_HEAVY && value <= 100) {
 			return WorkplaceLoad.FULL;
 		}
+		
+		System.out.println(memoryLoad);
+		System.out.println(cpuLoad);
 
 		throw new IllegalStateException("Percentage value out of 0..100 range");
 	}
