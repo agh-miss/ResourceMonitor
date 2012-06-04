@@ -58,6 +58,7 @@ public class MetricInterpreter {
 		ArrayList<MoveAgentTask> tasks = new ArrayList<MoveAgentTask>();
 		for (int i = 0; i < Math.min(sender.size(), receiver.size()); i++) {			
 			tasks.add(new MoveAgentTask(uuid, sender.get(i), receiver.get(i)));
+			GephiConnector.addEdge(sender.get(i).toString(), receiver.get(i).toString());
 			System.out.println("NEW TASK");
 		}
 		return tasks;

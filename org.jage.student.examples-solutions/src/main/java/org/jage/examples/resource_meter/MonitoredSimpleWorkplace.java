@@ -30,6 +30,7 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 	private static final UUID uuid = UUID.randomUUID();
 	private Map<IAgentAddress, Metric> metrics = new HashMap<IAgentAddress, Metric>();
 	private Integer randomLoad = new Random().nextInt(100);
+	private boolean isRegisteredInGephyConnector = false;
 
 	IResourceMeterStrategy resourceMeterStr;
 
@@ -90,11 +91,16 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 
 	@Override
 	public void step() {
+		if (!isRegisteredInGephyConnector) {
+			GephiConnector.addNode(getAddress().toString(), getAddress().toString());
+			isRegisteredInGephyConnector = true;
+		}
+
 		Integer cpuLoad = resourceMeterStr.getCpuLoad();
 		Integer memoryLoad = resourceMeterStr.getMemoryLoad();
 
-		sendObjectToAll(new Metric(randomLoad, memoryLoad, getAgents().size(),
-				uuid));
+		sendObjectToAll(new Metric(new Random().nextInt(100),
+				new Random().nextInt(100), getAgents().size(), uuid));
 
 		Pair<Object, IAgentAddress> message;
 
@@ -145,7 +151,6 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 		if (moveAgentTasks != null) {
 			for (MoveAgentTask moveAgentTask : moveAgentTasks) {
 				sendObject(moveAgentTask, moveAgentTask.getSourceWorkplace());
-				System.out.println("SENDING TASK");
 			}
 		}
 
@@ -153,7 +158,7 @@ public class MonitoredSimpleWorkplace extends ConnectedSimpleWorkplace {
 				+ cpuLoad.toString() + "%");
 		log.info("MEMORY LOAD in workplace " + nameInitializer + ": "
 				+ memoryLoad.toString() + "%");
-		
+
 		super.step();
 	}
 
